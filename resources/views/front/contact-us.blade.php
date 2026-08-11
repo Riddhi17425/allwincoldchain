@@ -1,0 +1,261 @@
+@include('layouts.frontheader')
+
+<!--===== HERO AREA STARTS =======-->
+<div class="hero1-section-area about-bg-area">
+  <img src="{{ asset('public/front/img/bg/Contact_banner.jpg')}}" alt="header-bg1.png" class="header-img1">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 m-auto">
+        <div class="hero-heading-area heading1 text-center">
+          <h1>Contact Us</h1>
+          <a href="{{ url('/')}}" class="backline">Home <i class="fa-solid fa-angle-right"></i><span>Contact Us</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--===== HERO AREA ENDS =======-->
+
+<!--===== CONTACT AREA STARTS =======-->
+<div class="contact1-section-area contact-inner sp1">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <div class="contact-header-area heading2">
+          <h5>Contact Us</h5>
+          <h2 class="tg-element-title">Get in Touch with Allwin Cold Chain Solutions!</h2>
+          <p>Whether you're looking for expert guidance, tailored solutions, or simply want to learn more about our cold chain products, we’re just a message away. At Allwin, we believe in prompt responses, clear communication, and long-term partnerships.
+            We’re here to assist you. From inquiries and quotations to service support and custom project needs.</p>
+          <div class="space48"></div>
+          <div class="row">
+              <div class="col-lg-12 col-md-12">
+              <div class="space48 d-md-none"></div>
+              <div class="contact-auhtor-side">
+                <div class="icons-text">
+                  <div class="icons">
+                    <i class="fa-solid fa-location-dot"></i>
+                  </div>
+                  <div class="text">
+                    <p>Address</p>
+                    <a href="https://maps.app.goo.gl/DRvQKFSc62bEANK46" target="_blank">Survey No. NA/1466, Plot No. 15,<br> 
+                        Opp. Mayur Wovens, Khatraj-KaIol- Road,<br>
+                        Moti-Bhoyan -382721<br>
+                        Dist. Gandhinagar, Gujarat - INDIA</a>
+                  </div>
+                </div>
+                <div class="space48"></div>
+              </div>
+            </div>
+            <div class="col-lg-12 col-md-12">
+              <div class="contact-auhtor-side">
+                <div class="icons-text">
+                  <div class="icons">
+                    <i class="fa-solid fa-phone"></i>
+                  </div>
+                  <div class="text">
+                    <p>Phone</p>
+                    <a href="tel:+919687640805">+91 96876 40805</a>
+                  </div>
+                </div>
+                <div class="space48"></div>
+                <!-- <div class="icons-text">
+                    <div class="icons">
+                      <i class="fa-solid fa-location-dot"></i>
+                    </div>
+                    <div class="text">
+                      <p>Address</p>
+                      <a href="tel:1234567890">London Eye ,London</a>
+                    </div>
+                  </div> -->
+              </div>
+            </div>
+
+            <div class="col-lg-12 col-md-12">
+              <div class="space48 d-md-none"></div>
+              <div class="contact-auhtor-side">
+                <div class="icons-text">
+                  <div class="icons">
+                    <i class="fa-solid fa-envelope"></i>
+                  </div>
+                  <div class="text">
+                    <p>Email</p>
+                    <a href="mailto:Sales@allwincoldchainsolutions.com" style="word-break: break-word;">Sales@allwincoldchainsolutions.com</a>
+                  </div>
+                </div>
+                <div class="space48"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+        <div class="col-lg-6">
+    <div class="contact-submit-boxarea">
+        <h4>Request A Quote</h4>
+        
+        @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
+
+        @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+        @endif
+
+        <form method="post" action="{{route('contact.store')}}">
+            @csrf
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="input-area">
+                        <p>Name (required)</p>
+                        <input type="text" name="name" id="name" placeholder="Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g,'');">
+                        <span class="text-danger error" id="name-error"></span>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-area">
+                        <p>Number (required)</p>
+                        <input type="text" name="phone" id="phone" placeholder="Phone" minlength="10" maxlength="15"  oninput="this.value = this.value.replace(/[^0-9+]/g, '').slice(0, 15);">
+                        <span class="text-danger error" id="phone-error"></span>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="input-area">
+                        <p>Email (required)</p>
+                        <input type="email" name="email" id="email" placeholder="Email">
+                        <span class="text-danger error" id="email-error"></span>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="input-area">
+                        <p>Additional Details (Optional)</p>
+                        <textarea name="details" placeholder="Describe your inquiry" cols="30" rows="10"></textarea>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="g-recaptcha" data-sitekey="6Lf2ZCkrAAAAAOAMhTiivaPWacTafRnkpWk3TKws"></div>
+                    <span class="text-danger error" id="captcha-error"></span>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="input-area1">
+                        <button type="submit" class="header-btn1">Submit Now <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+    </div>
+  </div>
+</div>
+<div class="mapouter">
+  <div class="gmap_canvas">
+    <!--<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d4506257.120552435!2d88.67021924228865!3d21.954385721237916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1704088968016!5m2!1sen!2sbd" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>-->
+    <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2899.349275883257!2d72.44485317531786!3d23.156713079080014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjPCsDA5JzI0LjIiTiA3MsKwMjYnNTAuNyJF!5e1!3m2!1sen!2sin!4v1729859554547!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+</div>
+<!--===== CONTACT AREA ENDS =======-->
+
+@include('layouts.frontfooter')
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+$(document).ready(function () {
+    $('#name').on('input', function () {
+        if ($(this).val().trim()) {
+            $('#name-error').text('');
+        }
+    });
+
+    $('#email').on('input', function () {
+        if (validateEmail($(this).val().trim())) {
+            $('#email-error').text('');
+        }
+    });
+
+    $('#phone').on('input', function () {
+        if ($(this).val().trim()) {
+            $('#phone-error').text('');
+        }
+    });
+
+    $('form').submit(function (e) {
+        var name = $('#name').val().trim();
+        var phone = $('#phone').val().trim();
+        var email = $('#email').val().trim();
+        var captchaResponse = grecaptcha.getResponse();
+        var errors = false;
+
+        if (!name) {
+            $('#name-error').text('Please Enter a Name.');
+            errors = true;
+        }
+
+        if (!phone) {
+            $('#phone-error').text('Please Enter a Phone Number.');
+            errors = true;
+        } else if (phone.length < 10) {
+            $('#phone-error').text('Phone number must be at least 10 digits.');
+            errors = true;
+        }
+
+        if (!validateEmail(email)) {
+            $('#email-error').text('Please Enter a Valid Email.');
+            errors = true;
+        }
+
+        if (!captchaResponse) {
+            $('#captcha-error').text('Please complete the CAPTCHA.');
+            errors = true;
+        }
+
+        if (errors) {
+            e.preventDefault();
+        }
+    });
+
+    function validateEmail(email) {
+        var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        
+        var spamPatterns = [
+            /^[a-zA-Z]{8,}[0-9]{3,}@/,  // Blocks gibberish + numbers (e.g., sdfghjkl123@gmail.com)
+            /^[0-9]+@/, // Blocks emails starting with only numbers
+            /(temp-mail|10minutemail|mailinator|guerrillamail|yopmail|yahoo.com|throwawaymail)/i, // Blocks disposable email providers
+            /^(test|demo|example|noreply|fake|admin|info|random|dummy)/i, // Blocks common spam words
+            /^(.)(\1){5,}@/, // Blocks repeated characters (aaaaaa@gmail.com)
+            /^(0123456789|9876543210|1234567890|0987654321)@/, // Blocks sequential patterns
+            /^(.)(.)(.)(.)(.).?\5\4\3\2\1@/, // Blocks mirrored patterns
+            /^[bcdfghjklmnpqrstvwxyz]{8,}@/, // **Blocks long gibberish consonant patterns**
+            /^[aeiou]{5,}@/, // Blocks all-vowel patterns (aeiouaeiou@gmail.com)
+            /^([a-z]{8,})[0-9]+@/, // Blocks long gibberish + number mix
+            /^[a-zA-Z0-9._%+-]{30,}@/ // **NEW: Blocks very long weird emails (to avoid abuse)**
+        ];
+
+        if (!emailPattern.test(email)) {
+            return false; // Invalid format
+        }
+
+        for (var i = 0; i < spamPatterns.length; i++) {
+            if (spamPatterns[i].test(email)) {
+                return false; // Detected as spam
+            }
+        }
+
+        return true; // Valid email
+    }
+});
+
+</script>

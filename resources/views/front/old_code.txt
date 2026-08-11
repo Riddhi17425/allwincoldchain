@@ -1,0 +1,33 @@
+#product faq dynamic section
+
+<div class="service-rightside-area heading2">
+    <div class="faq-auhtor-area1 sp2">
+        <div class="accordion accordion-flush active" id="accordionFlushExample">
+            @if(isset($dataFaq) && $dataFaq->title_description)
+            @php
+            $questions = json_decode($dataFaq->title_description, true);
+            @endphp
+
+            @if(!empty($questions))
+            <div class="accordion accordion-flush active" id="accordionFlushExample">
+                @foreach ($questions as $index => $item)
+                <div class="accordion-item" data-aos="fade-left" data-aos-duration="800">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{ $index }}" aria-expanded="false" aria-controls="flush-collapse{{ $index }}">
+                            {{ $item['title'] }}
+                        </button>
+                    </h2>
+                    <div id="flush-collapse{{ $index }}" class="accordion-collapse collapse {{ $index === 0 ? 'show' : '' }}" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">{{ $item['description'] }}</div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            @endif
+            @endif
+
+        </div>
+    </div>
+
+</div>
+#product faq dynamic section end

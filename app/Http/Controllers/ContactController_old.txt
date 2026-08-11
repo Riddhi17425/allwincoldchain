@@ -1,0 +1,114 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Contact;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
+use Exception;
+
+class ContactController extends Controller
+{
+    public function contact()
+    {
+        return view('front.contact-us');
+    }
+    
+    public function contactStore(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'phone' => 'required|numeric',
+            'email' => 'required|email',
+        ]);
+        // dd($request->all());
+        $contact = new Contact();
+        $contact->name = $request->name;
+        $contact->phone = $request->phone;
+        $contact->email = $request->email;
+        $contact->details = $request->details;
+
+        $contact->save();
+
+        $emailData = [
+            'name' => $contact->name,
+            'phone' => $contact->phone,
+            'email' => $contact->email,
+            'message' => $contact->details,
+        ];
+        // dd($emailData);
+        try {
+            Mail::send('mail.thankyou', $emailData, function ($message) use ($emailData) {
+                $message->to($emailData['email'])
+                    ->subject('Thank You!');
+            });
+
+            Mail::send('mail.inquirydata', ['data' => $emailData], function ($message) {
+                // $message->to('Jeet@intelliworkz.tech')
+                $message->to('allwincoldchainsolutions@gmail.com')
+                    ->subject('New Inquiry For Contact');
+            });
+        } catch (Exception $e) {
+            // Log the error for debugging purposes
+            Log::error('Mail send failed: ' . $e->getMessage());
+        }
+        return redirect()->route('thankyou');
+    }
+    // public function contactStore(Request $request)
+    // {
+    //     $request->validate([
+    //         'name' => 'required|string|max:255',
+    //         'phone' => 'required|numeric',
+    //         'email' => 'required|email',
+    //     ]);
+    //     // dd($request->all());
+    //     $contact = new Contact();
+    //     $contact->name = $request->name;
+    //     $contact->phone = $request->phone;
+    //     $contact->email = $request->email;
+    //     $contact->details = $request->details;
+
+    //     $contact->save();
+
+    //     $emailData = [
+    //         'name' => $contact->name,
+    //         'phone' => $contact->phone,
+    //         'email' => $contact->email,
+    //         'message' => $contact->details,
+    //     ];
+    //     // dd($emailData);
+    //     try {
+    //         Mail::send('mail.thankyou', $emailData, function ($message) use ($emailData) {
+    //             $message->to($emailData['email'])
+    //                 ->subject('Thank You');
+    //         });
+
+    //         Mail::send('mail.inquirydata', ['data' => $emailData], function ($message) {
+    //             $message->to('allwincoldchainsolutions@gmail.com')
+    //                 ->subject('New Inquiry For Contact');
+    //         });
+    //     } catch (Exception $e) {
+    //         // Log the error for debugging purposes
+    //         Log::error('Mail send failed: ' . $e->getMessage());
+    //     }
+    //     return redirect()->route('thankyou');
+    // }
+    
+    public function thankyou()
+    {   
+        // $data['thankyou'] = 'Thank you Yamini Patel for reaching out to Allwin. We have received your inquiry. We will contact you soon for the same.';
+
+        // try {
+        //     Mail::send('mail.thankyou', $data, function ($message) {
+        //         $message->to('webdeveloper3.intelliworkz@gmail.com')
+        //             ->subject('Thank You');
+        //     });
+        
+        //     echo "Email sent successfully!";
+        // } catch (Swift_TransportException $e) {
+        //     echo 'Failed to send email. Error: ' . $e->getMessage();
+        // }
+        return view('front.testmail');
+    }
+}
