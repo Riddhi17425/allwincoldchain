@@ -85,22 +85,33 @@
                                 <div class="row g-3 how-works-row">
                                     <div class="col-md-6">
                                         <label class="form-label">Table Label</label>
-                                        <input type="text" name="Table_label[]" required class="form-control">
+                                        <input type="text" name="Table_label[]" class="form-control">
                                     </div>
 
                                     <div class="col-md-6">
                                         <label class="form-label">Table Description</label>
-                                        <textarea id="Table_desc" name="Table_desc[]" class="form-control"></textarea>
+                                        <textarea name="Table_desc[]" class="form-control summernote"></textarea>
                                     </div>
 
                                     <div class="col-md-6">
-                                        <label class="form-label">Table Image</label>
-                                        <input type="file" name="Table_image[]" required class="form-control">
+                                        <label class="form-label">Table Image <small class="text-muted">(optional - leave blank for content-only section)</small></label>
+                                        <input type="file" name="Table_image[]" class="form-control">
                                     </div>
 
                                     <div class="col-md-6">
                                         <label class="form-label">Table Image Alt</label>
-                                        <input type="text" id="prod_img_alt[]" name="prod_img_alt[]" required class="form-control">
+                                        <input type="text" id="prod_img_alt[]" name="prod_img_alt[]" class="form-control">
+                                    </div>
+
+                                    <!-- CTA fields (per table entry) -->
+                                    <div class="col-md-6">
+                                        <label class="form-label">CTA Title</label>
+                                        <input type="text" name="cta_title[]" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label class="form-label">CTA Description</label>
+                                        <textarea name="cta_description[]" class="form-control summernote"></textarea>
                                     </div>
 
                                     <div class="col-md-6">
@@ -138,27 +149,64 @@
 <script src="{{ asset('public/admin_public/dist/assets/bundles/dataTables.bundle.js') }}"></script>
 
 <script>
+    $(document).ready(function() {
+        initializeSummernoteForDescriptions();
+    });
+
+    function initializeSummernoteForDescriptions() {
+        $('.summernote').each(function() {
+            // avoid re-initializing an already-initialized editor
+            if (!$(this).next('.note-editor').length) {
+                $(this).summernote({
+                    placeholder: 'Enter Description here...',
+                    height: 200,
+                    toolbar: [
+                        ['style', ['style']],
+                        ['font', ['bold', 'italic', 'underline', 'clear']],
+                        ['fontname', ['fontname']],
+                        ['color', ['color']],
+                        ['para', ['ul', 'ol', 'paragraph']],
+                        ['height', ['height']],
+                        ['insert', ['link', 'picture', 'hr']],
+                        ['view', ['fullscreen', 'codeview']],
+                        ['help', ['help']]
+                    ]
+                });
+            }
+        });
+    }
+
     $(document).on('click', '.add-work-more', function() {
         var html = `
             <div class="row g-3 how-works-row mt-1">
                                     <div class="col-md-6">
                                         <label class="form-label">Table Label</label>
-                                        <input type="text" name="Table_label[]" required class="form-control">
+                                        <input type="text" name="Table_label[]" class="form-control">
                                     </div>
                                     
                                     <div class="col-md-6">
                                         <label class="form-label">Table Description</label>
-                                        <textarea id="Table_desc" name="Table_desc[]" class="form-control"></textarea>
+                                        <textarea name="Table_desc[]" class="form-control summernote"></textarea>
                                     </div>
 
                                     <div class="col-md-6">
-                                        <label class="form-label">Table Image</label>
-                                        <input type="file" name="Table_image[]" required class="form-control">
+                                        <label class="form-label">Table Image <small class="text-muted">(optional)</small></label>
+                                        <input type="file" name="Table_image[]" class="form-control">
                                     </div>
 
                                      <div class="col-md-6">
                                         <label class="form-label">Table Image Alt</label>
-                                        <input type="text" id="prod_img_alt[]" name="prod_img_alt[]" required class="form-control">
+                                        <input type="text" id="prod_img_alt[]" name="prod_img_alt[]" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="form-label">CTA Title</label>
+                                        <input type="text" name="cta_title[]" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label class="form-label">CTA Description</label>
+                                        <textarea name="cta_description[]" class="form-control summernote"></textarea>
                                     </div>
              <div class="col-md-2">
             <button type="button" class="btn btn-danger remove-how-work">Remove</button>

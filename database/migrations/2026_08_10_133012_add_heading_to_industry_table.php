@@ -14,7 +14,9 @@ class AddHeadingToIndustryTable extends Migration
     public function up()
     {
         Schema::table('industry', function (Blueprint $table) {
-            $table->string('heading')->nullable()->after('title');
+            if (!Schema::hasColumn('industry', 'heading')) {
+                $table->string('heading')->nullable()->after('title');
+            }
         });
     }
 
@@ -26,7 +28,9 @@ class AddHeadingToIndustryTable extends Migration
     public function down()
     {
         Schema::table('industry', function (Blueprint $table) {
-            $table->dropColumn('heading');
+            if (Schema::hasColumn('industry', 'heading')) {
+                $table->dropColumn('heading');
+            }
         });
     }
 }

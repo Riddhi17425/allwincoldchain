@@ -12,9 +12,10 @@ class ProductFrontController extends Controller
     {
         $data = Product::where('prod_url', $prod_url)->where('is_delete', '0')->firstOrFail();
         $dataFaq = ProductFaq::where('product_id', $data->id)->where('is_delete', '0')->first();
+        $faqs = $dataFaq ? json_decode($dataFaq->title_description, true) : [];
         // {{dd($data);}}
           $metatitle = $data->meta_title ?? $data->name;
     $metadescription = $data->meta_description ?? '';
-        return view('front.product-detail', compact('data','dataFaq','metatitle','metadescription'));
+        return view('front.product-detail', compact('data','dataFaq','faqs','metatitle','metadescription'));
     }
 }

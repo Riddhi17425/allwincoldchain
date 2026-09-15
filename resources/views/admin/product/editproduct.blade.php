@@ -75,7 +75,6 @@
                                 <label class="form-label">Meta Description</label>
                                 <textarea name="meta_description" class="form-control">{{ $data->meta_description }}</textarea>
                             </div>
-
                         </div>
                     </div>
 
@@ -87,41 +86,47 @@
                         @endphp
                         @foreach($table_data as $index => $td)
                         <div class="how-works-container">
-                            <div id="how_works_fields">
-                                <div class="row g-3 how-works-row">
-                                    <div class="col-md-6">
-                                        <label class="form-label">Table Label</label>
-                                        <input type="text" name="table_label[]" value="{{ $td['label'] }}" required class="form-control">
+                            <div class="row g-3 how-works-row">
+                                <div class="col-md-6">
+                                    <label class="form-label">Table Label</label>
+                                    <input type="text" name="table_label[]" value="{{ $td['label'] }}" class="form-control">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Table Description</label>
+                                    <textarea id="table_desc" name="table_desc[]" class="form-control summernote">{{ $td['desc'] }}</textarea>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Table Image <small class="text-muted">(optional - leave blank for content-only section)</small></label>
+                                    <input type="file" name="table_image[]" class="form-control">
+                                    @if(!empty($td['image']))
+                                    @foreach(explode(',', $td['image']) as $img)
+                                    <div class="image-container_tab d-flex align-items-center mb-2">
+                                        <img src="{{ asset('public/Product images/' . $img) }}" width="100" class="me-2">
                                     </div>
+                                    @endforeach
+                                    @endif
+                                </div>
 
-                                    <div class="col-md-6">
-                                        <label class="form-label">Table Description</label>
-                                        <textarea id="table_desc" name="table_desc[]" class="form-control summernote">{{ $td['desc'] }}</textarea>
-                                    </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Table Image Alt</label>
+                                    <input type="text" id="prod_img_alt[]" name="prod_img_alt[]" value="{{ $td['alt'] }}" class="form-control">
+                                </div>
 
-                                    <div class="col-md-6">
-                                        <label class="form-label">Table Image</label>
-                                        <input type="file" name="table_image[]" class="form-control">
-                                        @if($td['image'])
-                                        @foreach(explode(',', $td['image']) as $img)
-                                        <div class="image-container_tab d-flex align-items-center mb-2">
-                                            <img src="{{ asset('public/Product images/' . $img) }}" width="100" class="me-2">
-                                        </div>
+                                <!-- CTA fields (per table entry) -->
+                                <div class="col-md-6">
+                                    <label class="form-label">CTA Title</label>
+                                    <input type="text" name="cta_title[]" value="{{ $td['cta_title'] ?? '' }}" class="form-control">
+                                </div>
 
-                                    </div>
+                                <div class="col-md-12">
+                                    <label class="form-label">CTA Description</label>
+                                    <textarea name="cta_description[]" class="form-control summernote">{{ $td['cta_desc'] ?? '' }}</textarea>
+                                </div>
 
-                                        <div class="col-md-6">
-                                            <label class="form-label">Table Image Alt</label>
-                                            <input type="text" id="prod_img_alt[]" name="prod_img_alt[]" value="{{ $td['alt'] }}" required class="form-control">
-                                        </div>
-                                        <div class="col-md-2 mt-3">
-                                            <button type="button" class="btn btn-danger remove-work-row">Remove </button>
-                                        </div>
-                                        @endforeach
-                                        @endif
-
-
-
+                                <div class="col-md-2 mt-3">
+                                    <button type="button" class="btn btn-danger remove-work-row">Remove</button>
                                 </div>
                             </div>
                         </div>
@@ -157,55 +162,71 @@
 
         function initializeSummernoteForDescriptions() {
             $('.summernote').each(function() {
-                console.log('click add-more');
-                $(this).summernote({
-                    placeholder: 'Enter Description here...',
-                    height: 200,
-                    toolbar: [
-                        ['style', ['style']],
-                        ['font', ['bold', 'italic', 'underline', 'clear']],
-                        ['fontname', ['fontname']],
-                        ['color', ['color']],
-                        ['para', ['ul', 'ol', 'paragraph']],
-                        ['height', ['height']],
-                        ['insert', ['link', 'picture', 'hr']],
-                        ['view', ['fullscreen', 'codeview']],
-                        ['help', ['help']]
-                    ]
-                });
+                if (!$(this).next('.note-editor').length) {
+                    $(this).summernote({
+                        placeholder: 'Enter Description here...',
+                        height: 200,
+                        toolbar: [
+                            ['style', ['style']],
+                            ['font', ['bold', 'italic', 'underline', 'clear']],
+                            ['fontname', ['fontname']],
+                            ['color', ['color']],
+                            ['para', ['ul', 'ol', 'paragraph']],
+                            ['height', ['height']],
+                            ['insert', ['link', 'picture', 'hr']],
+                            ['view', ['fullscreen', 'codeview']],
+                            ['help', ['help']]
+                        ]
+                    });
+                }
             });
         }
         initializeSummernoteForDescriptions();
+
+        // expose globally so the add-work-more handler below can reuse it
+        window.initializeSummernoteForDescriptions = initializeSummernoteForDescriptions;
     });
     $(document).on('click', '.add-work-more', function() {
         var html = `
             <div class="row g-3 how-works-row mt-1">
                                     <div class="col-md-6">
                                         <label class="form-label">Table Label</label>
-                                        <input type="text" name="table_label[]" required class="form-control">
+                                        <input type="text" name="table_label[]" class="form-control">
                                     </div>
                                     
                                     <div class="col-md-6">
                                         <label class="form-label">Table Description</label>
-                                        <textarea id="table_desc" name="table_desc[]" class="form-control summernote"></textarea>
+                                        <textarea name="table_desc[]" class="form-control summernote"></textarea>
                                     </div>
 
                                     <div class="col-md-6">
-                                        <label class="form-label">Table Image</label>
+                                        <label class="form-label">Table Image <small class="text-muted">(optional)</small></label>
                                         <input type="file" name="table_image[]" class="form-control">
                                     </div>
 
                                     <div class="col-md-6">
                                             <label class="form-label">Table Image Alt</label>
-                                            <input type="text" id="prod_img_alt[]" name="prod_img_alt[]" required class="form-control">
+                                            <input type="text" id="prod_img_alt[]" name="prod_img_alt[]" class="form-control">
                                         </div>
+
+                                    <div class="col-md-6">
+                                        <label class="form-label">CTA Title</label>
+                                        <input type="text" name="cta_title[]" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label class="form-label">CTA Description</label>
+                                        <textarea name="cta_description[]" class="form-control summernote"></textarea>
+                                    </div>
              <div class="col-md-2">
             <button type="button" class="btn btn-danger remove-work-row">Remove</button>
             </div>
 
             </div>`;
         $('#how_works_fields').append(html);
-        
+        if (typeof window.initializeSummernoteForDescriptions === 'function') {
+            window.initializeSummernoteForDescriptions();
+        }
 
     });
     $(document).on('click', '.remove-work-row', function() {
