@@ -35,7 +35,7 @@ class ProductController extends Controller
         if ($request->hasFile('product_header_image')) {
             $file = $request->file('product_header_image');
             $filename = $file->getClientOriginalName();
-            $path = public_path('/Product images');
+            $path = public_path('/product-images');
             $file->move($path, $filename);
             $product->product_header_image = $filename;
         }
@@ -43,7 +43,7 @@ class ProductController extends Controller
         if ($request->hasFile('product_icon')) {
             $file = $request->file('product_icon');
             $filename = $file->getClientOriginalName();
-            $path = public_path('/Product images');
+            $path = public_path('/product-images');
             $file->move($path, $filename);
             $product->product_icon = $filename;
         }
@@ -63,7 +63,7 @@ class ProductController extends Controller
             if (isset($tableImages[$index]) && $tableImages[$index]) {
                 $image = $tableImages[$index];
                 $imageFilename = $image->getClientOriginalName();
-                $imagePath = public_path('/Product images');
+                $imagePath = public_path('/product-images');
                 $image->move($imagePath, $imageFilename);
             }
 
@@ -105,7 +105,7 @@ class ProductController extends Controller
         if ($request->hasFile('product_header_image')) {
             $file = $request->file('product_header_image');
             $filename = $file->getClientOriginalName();
-            $path = public_path('/Product images');
+            $path = public_path('/product-images');
             $file->move($path, $filename);
             $product->product_header_image = $filename;
         }
@@ -113,7 +113,7 @@ class ProductController extends Controller
         if ($request->hasFile('product_icon')) {
             $file = $request->file('product_icon');
             $filename = $file->getClientOriginalName();
-            $path = public_path('/Product images');
+            $path = public_path('/product-images');
             $file->move($path, $filename);
             $product->product_icon = $filename;
         }
@@ -147,7 +147,7 @@ class ProductController extends Controller
             if (isset($tableImages[$index]) && $tableImages[$index]) {
                 $file = $tableImages[$index];
                 $filename = $file->getClientOriginalName();
-                $path = public_path('/Product images');
+                $path = public_path('/product-images');
                 $file->move($path, $filename);
             } else {
                 $filename = $existing_work_tab_images[$index]['image'] ?? null;

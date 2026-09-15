@@ -66,7 +66,7 @@ $tableData = json_decode($data->table_details, true);
 
                 <div class="about-header-area heading4">
 
-                    <h5 data-aos="fade-left" data-aos-duration="800" class="aos-init aos-animate">Why Choose Us</h5>
+                    <!--<h5 data-aos="fade-left" data-aos-duration="800" class="aos-init aos-animate">Why Choose Us</h5>-->
 
                     <h2 class="tg-element-title" style="perspective: 400px;">
 
@@ -88,7 +88,7 @@ $tableData = json_decode($data->table_details, true);
 
                 <div class="about-header-area heading4 text-center">
 
-                    <h5 class="aos-init aos-animate" data-aos="fade-up" data-aos-duration="800">Why Choose Us</h5>
+                    <!--<h5 class="aos-init aos-animate" data-aos="fade-up" data-aos-duration="800">Why Choose Us</h5>-->
 
                     <h2 class="tg-element-title" style="perspective: 400px;">
 
@@ -665,7 +665,7 @@ $tableData = json_decode($data->table_details, true);
 
                 <div class="about-header-area heading4">
 
-                    <h5 data-aos="fade-left" data-aos-duration="800" class="aos-init aos-animate">Why Choose Us</h5>
+                    <!--<h5 data-aos="fade-left" data-aos-duration="800" class="aos-init aos-animate">Why Choose Us</h5>-->
 
                     <h2 class="tg-element-title" style="perspective: 400px;">
 
@@ -687,7 +687,7 @@ $tableData = json_decode($data->table_details, true);
 
                 <div class="about-header-area heading4 text-center">
 
-                    <h5 class="aos-init aos-animate" data-aos="fade-up" data-aos-duration="800">Why Choose Us</h5>
+                    <!--<h5 class="aos-init aos-animate" data-aos="fade-up" data-aos-duration="800">Why Choose Us</h5>-->
 
                     <h2 class="tg-element-title" style="perspective: 400px;">
 
@@ -788,7 +788,7 @@ $tableData = json_decode($data->table_details, true);
 
                 <div class="about-header-area heading4">
 
-                    <h5 data-aos="fade-left" data-aos-duration="800" class="aos-init aos-animate">Why Choose Us</h5>
+                    <!--<h5 data-aos="fade-left" data-aos-duration="800" class="aos-init aos-animate">Why Choose Us</h5>-->
 
                     <h2 class="tg-element-title" style="perspective: 400px;">
 
@@ -810,7 +810,7 @@ $tableData = json_decode($data->table_details, true);
 
                 <div class="about-header-area heading4 text-center">
 
-                    <h5 class="aos-init aos-animate" data-aos="fade-up" data-aos-duration="800">Why Choose Us</h5>
+                    <!--<h5 class="aos-init aos-animate" data-aos="fade-up" data-aos-duration="800">Why Choose Us</h5>-->
 
                     <h2 class="tg-element-title" style="perspective: 400px;">
 
@@ -1071,7 +1071,7 @@ $tableData = json_decode($data->table_details, true);
 
                 <div class="about-header-area heading4">
 
-                    <h5 data-aos="fade-left" data-aos-duration="800" class="aos-init aos-animate">Why Choose Us</h5>
+                    <!--<h5 data-aos="fade-left" data-aos-duration="800" class="aos-init aos-animate">Why Choose Us</h5>-->
 
                     <h2 class="tg-element-title" style="perspective: 400px;">
 
@@ -1092,8 +1092,7 @@ $tableData = json_decode($data->table_details, true);
             <div class="col-lg-12">
 
                 <div class="about-header-area heading4 text-center ps-0" >
-
-                    <h5 class="aos-init aos-animate" data-aos="fade-up" data-aos-duration="800">Why Choose Us</h5>
+                    {{-- <h5 class="aos-init aos-animate" data-aos="fade-up" data-aos-duration="800">Why Choose Us</h5> --}}
 
                     <h2 class="tg-element-title" style="perspective: 400px;">
 
@@ -1194,7 +1193,7 @@ $tableData = json_decode($data->table_details, true);
 
                 <div class="about-header-area heading4">
 
-                    <h5 data-aos="fade-left" data-aos-duration="800" class="aos-init aos-animate">Why Choose Us</h5>
+                    <!--<h5 data-aos="fade-left" data-aos-duration="800" class="aos-init aos-animate">Why Choose Us</h5>-->
 
                     <h2 class="tg-element-title" style="perspective: 400px;">
 
@@ -1216,7 +1215,7 @@ $tableData = json_decode($data->table_details, true);
 
                 <div class="about-header-area heading4 text-center">
 
-                    <h5 class="aos-init aos-animate" data-aos="fade-up" data-aos-duration="800">Why Choose Us</h5>
+                    <!--<h5 class="aos-init aos-animate" data-aos="fade-up" data-aos-duration="800">Why Choose Us</h5>-->
 
                     <h2 class="tg-element-title" style="perspective: 400px;">
 
