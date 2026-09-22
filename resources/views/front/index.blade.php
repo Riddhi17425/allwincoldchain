@@ -74,7 +74,7 @@
     <div class="row align-items-center">
       <div class="col-lg-12">
         <div class="about-header-area heading9">
-          <p data-aos="fade-left" data-aos-duration="800" class="aos-init aos-animate bg-subhead">About Us</p>
+          <!-- <p data-aos="fade-left" data-aos-duration="800" class="aos-init aos-animate bg-subhead">About Us</p> -->
           <h2 class="tg-element-title" style="perspective: 400px;">Temperature Controlled Packaging for Every Application</h2>
           <p data-aos="fade-left" data-aos-duration="1000" class="aos-init aos-animate mb-3">A cold chain's effectiveness depends greatly on its packaging. If the packaging has a fault, the consequences will span the entire spectrum from financial loss to loss of potency of a vaccine batch or early spoilage of seafood delivery or a laboratory sample that arrived outside of its safe range. Such failures happen too often, usually due to inadequate packaging.</p>
           <p data-aos="fade-left" data-aos-duration="1000" class="aos-init aos-animate">Allwin Cold Chain Solutions was built to close that gap. We design and supply <b>temperature control solutions</b> that keep products within their required temperature band for as long as the journey takes, whether that's a same-day local delivery or a multi-day international shipment. Our range is built to reduce spoilage, extend shelf life, and help you meet food safety and pharma compliance standards without adding complexity to your supply chain.</p>
