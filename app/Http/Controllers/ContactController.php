@@ -149,7 +149,8 @@ class ContactController extends Controller
 
         // ✅ Save to Google Sheet
         try {
-            Http::post('https://script.google.com/macros/s/AKfycbz3UAP4Nfq20XQmo4mnQQkD552SN-woe55XsmaK4aFrrFbFm_eV_elwtToSiJmDvFxt/exec', [
+            Http::post('https://script.google.com/macros/s/AKfycbyNYd2FAH4aGfLjZs-EHL0T9T0CYwgb1sADD7efuiaQSh81DleLJAU2h9ZdDmSIRz1C7w/exec', [
+                'inquiry_type' => 'Contact Form',
                 'name' => $contact->name,
                 'phone' => $contact->phone,
                 'email' => $contact->email,

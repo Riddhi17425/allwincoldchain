@@ -24,6 +24,7 @@ use App\Http\Controllers\IndustryFrontController;
 use App\Http\Controllers\ProductFrontController;
 use App\Http\Controllers\ServiceFrontController;
 use App\Http\Controllers\WhatsappController;
+use App\Http\Controllers\EnquiryController;
 
 
 /*
@@ -61,6 +62,7 @@ Route::get('/contact-us', [ContactController::class, 'contact'])->name('contact'
 Route::post('/contact-us', [ContactController::class, 'contactStore'])->name('contact.store');
 Route::get('/thank-you', [ContactController::class, 'thankyou'])->name('thankyou');
 Route::post('/whatsapp-store', [WhatsappController::class, 'store']);
+Route::post('/enquiry-store', [EnquiryController::class, 'store'])->name('enquiry.store');
 
 //backend route
 Route::get('login', [dashboardController::class, 'login'])->name('login');

@@ -145,6 +145,7 @@
 <!--===== FOOTER AREA ENDS =======-->
 @include('layouts.whatsapp')
 
+@include('layouts.enquiry-form')
 
 <!--===== JS SCRIPT LINK =======-->
 <script src="{{ asset('public/front/js/plugins/bootstrap.min.js')}}"></script>
