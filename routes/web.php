@@ -4,7 +4,7 @@ use App\Http\Controllers\AboutFrontController;
 use App\Http\Controllers\admin\AboutController;
 use App\Http\Controllers\admin\adminController;
 use Illuminate\Support\Facades\Route;
-use  Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\IndustryController;
 use App\Http\Controllers\admin\IndustryFaqController;
@@ -25,6 +25,7 @@ use App\Http\Controllers\ProductFrontController;
 use App\Http\Controllers\ServiceFrontController;
 use App\Http\Controllers\WhatsappController;
 use App\Http\Controllers\EnquiryController;
+use App\Http\Controllers\SitemapController;
 
 
 /*
@@ -41,6 +42,8 @@ use App\Http\Controllers\EnquiryController;
 //Front route
 Route::get('/', [dashboardController::class, 'index'])->name('/');
 
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
+
 Route::get('/test', function () {
     return view('front.test');
 });
@@ -56,7 +59,6 @@ Route::get('product/{prod_url}', [ProductFrontController::class, 'show'])->name(
 Route::get('industry/{ind_url}', [IndustryFrontController::class, 'show'])->name('industries.show');
 Route::get('service/{ser_url}', [ServiceFrontController::class, 'show'])->name('services.show');
 Route::get('about/', [AboutFrontController::class, 'show'])->name('about-us.show');
-
 
 Route::get('/contact-us', [ContactController::class, 'contact'])->name('contact');
 Route::post('/contact-us', [ContactController::class, 'contactStore'])->name('contact.store');
@@ -76,7 +78,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/superAdmin', [superAdminController::class, 'superAdmin'])->name('superAdmin');
 
 	Route::get('/admin/dashboard', [adminController::class, 'admin'])->name('admin/dashboard');
-
 	
 	Route::resource('admin/home', HomeAdminController::class);
 	Route::resource('admin/industry', IndustryController::class);
@@ -87,8 +88,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('admin/product', ProductController::class);
 	Route::resource('admin/productfaq', ProductFaqController::class);
     Route::resource('admin/blog', BlogsController::class);	
-
-
 
 	Route::prefix('backend')->group(function () {
 		Route::prefix('')->group(function (): void {});
