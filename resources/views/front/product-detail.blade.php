@@ -1624,4 +1624,55 @@ $tableData = json_decode($data->table_details, true);
 
 </style>
 
+{{-- PRODUCT SCHEMA START --}}
+
+@php
+    $productSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'Product',
+        'name' => trim(strip_tags($data->title ?? '')),
+        'url' => url()->current(),
+    ];
+
+    // Main product image
+    if (!empty($data->product_header_image)) {
+        $productSchema['image'] = asset(
+            'public/product-images/' . $data->product_header_image
+        );
+    }
+
+    // Product description
+    $productDescription = trim(
+        preg_replace(
+            '/\s+/',
+            ' ',
+            html_entity_decode(
+                strip_tags($data->meta_description ?? ''),
+                ENT_QUOTES | ENT_HTML5,
+                'UTF-8'
+            )
+        )
+    );
+
+    if ($productDescription !== '') {
+        $productSchema['description'] = $productDescription;
+    }
+@endphp
+
+@if(!empty($productSchema['name']))
+<script type="application/ld+json">
+{!! json_encode(
+    $productSchema,
+    JSON_UNESCAPED_SLASHES |
+    JSON_UNESCAPED_UNICODE |
+    JSON_HEX_TAG |
+    JSON_HEX_APOS |
+    JSON_HEX_AMP |
+    JSON_HEX_QUOT
+) !!}
+</script>
+@endif
+
+{{-- PRODUCT SCHEMA END --}}
+
 @include('layouts.frontfooter')
