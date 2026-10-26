@@ -72,7 +72,8 @@ class dashboardController extends Controller
       }
       
        
-      public function blogs(){
+      public function blogs()
+      {
         $metatitle = 'Blogs';
         $metadescription = 'Blogs Description';
             $blogs = Blogs::whereNull('deleted_at')
@@ -80,9 +81,10 @@ class dashboardController extends Controller
                   ->orderBy('id', 'desc')
                   ->get();
         return view('front.blog',compact('metatitle', 'metadescription','blogs'));
-    }
+      }
     
-    public function blogsdetail($url){
+    public function blogsdetail($url)
+    {
         
         $blogsdetail = Blogs::whereNull('deleted_at')
                   //->where('status', 'Active')

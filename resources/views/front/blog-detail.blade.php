@@ -70,6 +70,91 @@
 @endif
 <!--===== BLOG AREA ENDS =======-->
 
+{{-- START - DYNAMIC BLOGPOSTING SCHEMA --}}
+
+@php
+    $schemaUrl = url('/blog/' . $blogsdetail->url);
+
+    $schemaDescription = trim(
+        preg_replace(
+            '/\s+/',
+            ' ',
+            html_entity_decode(
+                strip_tags(
+                    $blogsdetail->short_description
+                    ?? $blogsdetail->meta_description
+                    ?? ''
+                ),
+                ENT_QUOTES | ENT_HTML5,
+                'UTF-8'
+            )
+        )
+    );
+
+    $schemaImage = !empty($blogsdetail->front_image)
+        ? url('public/blogs/front_image/' . rawurlencode(basename($blogsdetail->front_image)))
+        : null;
+
+    $blogPostingSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'BlogPosting',
+
+        'mainEntityOfPage' => [
+            '@type' => 'WebPage',
+            '@id' => $schemaUrl,
+        ],
+
+        'headline' => $blogsdetail->title,
+
+        'author' => [
+            '@type' => 'Organization',
+            'name' => 'Allwin Cold Chain',
+        ],
+
+        'publisher' => [
+            '@type' => 'Organization',
+            'name' => 'Allwin Cold Chain',
+            'logo' => [
+                '@type' => 'ImageObject',
+                'url' => asset('public/front/img/logo/allwin_web_logo-1.svg'),
+            ],
+        ],
+    ];
+
+    if ($schemaDescription !== '') {
+        $blogPostingSchema['description'] = $schemaDescription;
+    }
+
+    if ($schemaImage) {
+        $blogPostingSchema['image'] = $schemaImage;
+    }
+
+    if (!empty($blogsdetail->date)) {
+        $blogPostingSchema['datePublished'] =
+            \Carbon\Carbon::parse($blogsdetail->date)->toDateString();
+
+        $blogPostingSchema['dateModified'] =
+            !empty($blogsdetail->updated_at)
+                ? \Carbon\Carbon::parse($blogsdetail->updated_at)->toDateString()
+                : $blogPostingSchema['datePublished'];
+    }
+@endphp
+
+<script type="application/ld+json">
+{!! json_encode(
+    $blogPostingSchema,
+    JSON_UNESCAPED_SLASHES |
+    JSON_UNESCAPED_UNICODE |
+    JSON_HEX_TAG |
+    JSON_HEX_APOS |
+    JSON_HEX_AMP |
+    JSON_HEX_QUOT
+) !!}
+</script>
+
+{{-- END - DYNAMIC BLOGPOSTING SCHEMA --}}
+
+{{-- START - FAQ SCHEMA --}}
 @if(!empty($faqs) && is_array($faqs))
 
 @php
@@ -109,6 +194,7 @@
         }, $faqItems),
     ];
 @endphp
+{{-- END - FAQ SCHEMA --}}
 
 <div class="accoding my-5">
     <div class="container">
@@ -291,7 +377,6 @@ p strong
 
 
 </style>
+<!--===== BLOG AREA ENDS =======-->
 
-
-  <!--===== BLOG AREA ENDS =======-->
 @include('layouts.frontfooter')
