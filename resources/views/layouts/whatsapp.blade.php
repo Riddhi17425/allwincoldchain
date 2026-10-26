@@ -147,7 +147,7 @@
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Accept': 'application/json', // Yeh zaroori hai Laravel ke liye
+            'Accept': 'application/json',
             'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
         },
         body: JSON.stringify({
@@ -155,16 +155,14 @@
             message: messageText
         })
     })
-    .then(response => response.json()) // Response ko JSON mein convert karein
+    .then(response => response.json()) 
     // .then(data => {
     //     if(data.success) {
-    //         // Success hone par WhatsApp open karein
     //         window.open(data.url, "_blank");
     //         btn.innerHTML = "Start Chat";
     //         btn.disabled = false;
     //         toggleWhatsapp();
     //     } else {
-    //         alert("Validation Error: Check phone format");
     //         btn.disabled = false;
     //         btn.innerHTML = "Start Chat";
     //     }
