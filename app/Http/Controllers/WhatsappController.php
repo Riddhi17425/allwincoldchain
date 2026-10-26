@@ -30,7 +30,7 @@ public function store(Request $request)
     ];
 
     try {
-        Http::post('https://script.google.com/macros/s/AKfycbzY8bSiXB6PuPgCjy4PXhSdWRk7ntuQvnJHtKWG25edOBmuWtG9EKguLmNpDVJ99mw91A/exec', $payload);
+        Http::post('https://script.google.com/macros/s/AKfycby2kpODecGzDytMdjzYvoCptd1mpn8LDKzk7YiiNAQPYi0fz3FpeARYrvHKtwo5d-d7/exec', $payload);
     } catch (\Exception $e) {
         // Sheet fail ho toh bhi error na aaye
     }
