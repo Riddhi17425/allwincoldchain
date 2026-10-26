@@ -100,30 +100,6 @@ Road, Opp. Mayur Wovens, Moti Bhoyan",
 }
 }
 </script>
-
-
-<!--Product Schema-->
-<script type="application/ld+json">
-{
-"@context": "https://schema.org/",
-"@type": "Product",
-"name": "Allwin Cold Chain Solutions",
-"image": "https://www.allwincoldchainsolutions.com/assets/images/logo.png",
-"description": "Allwin Cold Chain Solutions provides temperature-controlled packaging and
-logistics solutions for healthcare, life sciences, food distribution and other cold chain industries.",
-"brand": {
-"@type": "Brand",
-"name": "Allwin Cold Chain Solutions"
-},
-"aggregateRating": {
-"@type": "AggregateRating",
-"ratingValue": "5.0",
-"bestRating": "5",
-"worstRating": "1",
-"ratingCount": "1"
-}
-}
-</script>
 </head> 
 
 <body class="homepage1-body tg-heading-subheading animation-style3">
