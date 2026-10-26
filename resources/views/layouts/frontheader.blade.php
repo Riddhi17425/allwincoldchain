@@ -283,7 +283,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="allmobilesection">
         <a href="{{route('contact')}}" class="header-btn1">Get Started <i class="fa-solid fa-arrow-right"></i></a>
         <div class="single-footer">
-          <h3>Contact Info</h3>
+          <p>Contact Info</p>
           <div class="footer1-contact-info">
             <div class="contact-info-single">
               <div class="contact-info-icon">
@@ -304,7 +304,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <!--</div>-->
 
             <div class="single-footer">
-              <h3>Our Location</h3>
+              <p>Our Location</p>
 
               <div class="contact-info-single">
                 <div class="contact-info-icon">
