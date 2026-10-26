@@ -73,17 +73,6 @@
         letter-spacing: .01em;
     }
 
-
-
-    /* =====================================================
-       TRANSPARENT OVERLAY
-
-       IMPORTANT:
-       This does NOT change the homepage background.
-       No blur.
-       No dark background.
-    ===================================================== */
-
     .contact-overlay {
         position: fixed;
 
@@ -1510,14 +1499,6 @@
             "aria-expanded",
             "true"
         );
-
-
-        /*
-         * IMPORTANT:
-         * Do NOT change body overflow.
-         * This keeps the existing homepage exactly as it is.
-         */
-
     }
 
 
