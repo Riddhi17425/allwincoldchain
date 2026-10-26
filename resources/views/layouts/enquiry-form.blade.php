@@ -1082,9 +1082,9 @@
 
     <div class="contact-header">
 
-        <h3 class="contact-title">
+        <p class="contact-title">
             Get in Touch
-        </h3>
+        </p>
 
 
         <button
@@ -1408,9 +1408,9 @@
             </div>
 
 
-            <h3>
+            <p>
                 Thank You!
-            </h3>
+            </p>
 
 
             <p>

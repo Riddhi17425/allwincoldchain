@@ -63,11 +63,11 @@ class dashboardController extends Controller
       public function product4()
       {
             return view('front.data-loggers');
-      }
+      } 
       public function faq()
       {
-          $metatitle = "FAQs – Cold Chain Logistics Solutions & Services";
-          $metadescription = "Find answers to common questions about cold chain logistics, cold chain solutions, and cold chain services, including packaging, temperature control & more.";
+          $metatitle = "Cold Chain Packaging FAQs | Allwin";
+          $metadescription = "Explore cold chain packaging FAQs covering insulated boxes, PCM ice packs, data loggers, temperature control and custom packaging solutions.";
             return view('front.faq',compact('metatitle','metadescription'));
       }
       
