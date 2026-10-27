@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Industry;
 use App\Models\Blogs;
+use App\Models\Service;
 
 class SitemapController extends Controller
 {
@@ -105,8 +106,45 @@ class SitemapController extends Controller
             $xml .= '</url>' . "\n";
         }
 
+        // 4. ALL SERVICES
+        $services = Service::where('is_delete', '0')
+            ->whereNotNull('ser_url')
+            ->where('ser_url', '!=', '')
+            ->get();
 
-        // 4. ALL STATIC PAGES
+        foreach ($services as $service)
+        {
+            // Replace service_url with your actual service URL column
+            if (empty($service->ser_url)) {
+                continue;
+            }
+
+            // Replace services.show with your actual service detail route
+            $loc = route('services.show', [
+                'ser_url' => $service->ser_url
+            ]);
+
+            $lastmod = optional($service->updated_at)->toAtomString();
+
+            $xml .= '<url>';
+
+            $xml .= '<loc>'
+                . htmlspecialchars($loc, ENT_XML1, 'UTF-8')
+                . '</loc>';
+
+            if ($lastmod)
+            {
+                $xml .= '<lastmod>'
+                    . htmlspecialchars($lastmod, ENT_XML1, 'UTF-8')
+                    . '</lastmod>';
+            }
+
+            $xml .= '<priority>0.60</priority>';
+
+            $xml .= '</url>' . "\n";
+        }
+
+        // 5. ALL STATIC PAGES
         $staticRoutes = [
             'about-us.show',
             'contact',
@@ -134,7 +172,7 @@ class SitemapController extends Controller
         }
 
 
-        // 5. ALL BLOGS
+        // 6. ALL BLOGS
         $blogs = Blogs::where('status', 1)
             ->whereNull('deleted_at')
             ->get();
