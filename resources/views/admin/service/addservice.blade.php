@@ -38,6 +38,29 @@
                             <input type="text" id="ind_url" name="ind_url" required class="form-control">
                         </div>
 
+                        <!-- Meta Title -->
+                        <div class="col-md-6">
+                            <label class="form-label">Meta Title</label>
+                            <input
+                                type="text"
+                                name="meta_title"
+                                class="form-control"
+                                placeholder="Enter meta title"
+                                maxlength="255"
+                            >
+                        </div>
+
+                        <!-- Meta Description -->
+                        <div class="col-md-12">
+                            <label class="form-label">Meta Description</label>
+                            <textarea
+                                name="meta_description"
+                                class="form-control"
+                                rows="4"
+                                placeholder="Enter meta description"
+                            ></textarea>
+                        </div>
+
                         <div class="col-md-6">
                             <label class="form-label">Header Image Alt</label>
                             <input type="text" id="header_img_alt" name="header_img_alt" required class="form-control">

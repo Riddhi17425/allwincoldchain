@@ -44,6 +44,30 @@
                             <input type="text" id="ser_url" name="ser_url" value="{{$data->ser_url}}" class="form-control">
                         </div>
 
+                        <!-- Meta Title -->
+                        <div class="col-md-6">
+                            <label class="form-label">Meta Title</label>
+                            <input
+                                type="text"
+                                name="meta_title"
+                                value="{{ old('meta_title', $data->meta_title) }}"
+                                class="form-control"
+                                placeholder="Enter meta title"
+                                maxlength="255"
+                            >
+                        </div>
+
+                        <!-- Meta Description -->
+                        <div class="col-md-12">
+                            <label class="form-label">Meta Description</label>
+                            <textarea
+                                name="meta_description"
+                                class="form-control"
+                                rows="4"
+                                placeholder="Enter meta description"
+                            >{{ old('meta_description', $data->meta_description) }}</textarea>
+                        </div>
+
                         <div class="col-md-6">
                             <label class="form-label">Header Image Alt</label>
                             <input type="text" id="header_img_alt" name="header_img_alt" value="{{$data->header_img_alt}}" required class="form-control">

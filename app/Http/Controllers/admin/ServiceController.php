@@ -40,6 +40,11 @@ class ServiceController extends Controller
         $service->ser_url = $request->ind_url;
         $service->work_title = $request->work_title;
         $service->work_desc = $request->work_desc;
+
+        // SEO Meta Fields
+        $service->meta_title = $request->meta_title;
+        $service->meta_description = $request->meta_description;
+
         if ($request->hasFile('service_header_image')) {
             $file = $request->file('service_header_image');
             $filename = $file->getClientOriginalName();
@@ -136,6 +141,10 @@ class ServiceController extends Controller
         $service->ser_url = $request->ser_url;
         $service->work_title = $request->work_title;
         $service->work_desc = $request->work_desc;
+
+        // SEO Meta Fields
+        $service->meta_title = $request->meta_title;
+        $service->meta_description = $request->meta_description;
 
         $service->service_banner_alt = $request->service_banner_alt;
 
@@ -248,10 +257,6 @@ class ServiceController extends Controller
 
         return redirect('/admin/service')->with('success', 'Service Updated Successfully');
     }
-
-
-
-
 
     public function destroy($id)
     {
