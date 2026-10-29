@@ -30,7 +30,7 @@
 
 <!--===== HERO AREA ENDS =======-->
 
-@if ($data->prod_url == 'single-use-packing')
+@if ($data->prod_url == 'single-use-cold-chain-packaging')
 
 @php
 
@@ -627,7 +627,7 @@ $tableData = json_decode($data->table_details, true);
 
 @endif
 
-@if ($data->prod_url == 'reusable-shippers')
+@if ($data->prod_url == 'reusable-cold-chain-shippers')
 
 @php
 
@@ -1033,7 +1033,7 @@ $tableData = json_decode($data->table_details, true);
 
 @endif
 
-@if ($data->prod_url == 'data-loggers')
+@if ($data->prod_url == 'cold-chain-temperature-data-logger')
 
 @php
 

@@ -472,7 +472,7 @@
 
           </div>
 
-          <a href="{{ route('products.show', 'single-use-packing')}}" class="header-btn1" style="padding: 10px 25px; font-size: 14px;">Read More <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="{{ route('products.show', 'single-use-cold-chain-packaging')}}" class="header-btn1" style="padding: 10px 25px; font-size: 14px;">Read More <i class="fa-solid fa-arrow-right"></i></a>
 
         </div>
 
@@ -540,7 +540,7 @@
 
           </div>
 
-          <a href="{{ route('products.show', 'reusable-shippers')}}" class="header-btn1" style="padding: 10px 25px; font-size: 14px;">Read More <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="{{ route('products.show', 'reusable-cold-chain-shippers')}}" class="header-btn1" style="padding: 10px 25px; font-size: 14px;">Read More <i class="fa-solid fa-arrow-right"></i></a>
 
         </div>
 
@@ -682,7 +682,7 @@
 
           </div>
 
-          <a href="{{ route('products.show', 'data-loggers')}}" class="header-btn1" style="padding: 10px 25px; font-size: 14px;">Read More <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="{{ route('products.show', 'cold-chain-temperature-data-logger')}}" class="header-btn1" style="padding: 10px 25px; font-size: 14px;">Read More <i class="fa-solid fa-arrow-right"></i></a>
 
         </div>
 
