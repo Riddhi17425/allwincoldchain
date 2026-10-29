@@ -1657,6 +1657,20 @@ $tableData = json_decode($data->table_details, true);
     if ($productDescription !== '') {
         $productSchema['description'] = $productDescription;
     }
+
+    // Brand
+    $productSchema['brand'] = [
+        '@type' => 'Brand',
+        'name' => 'Allwin Cold Chain Solutions Pvt. Ltd.',
+    ];
+
+    $productSchema['aggregateRating'] = [
+        '@type' => 'AggregateRating',
+        'ratingValue' => '5',
+        'bestRating' => '5',
+        'worstRating' => '0',
+        'ratingCount' => '5',
+    ];
 @endphp
 
 @if(!empty($productSchema['name']))
