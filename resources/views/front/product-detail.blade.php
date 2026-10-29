@@ -1624,6 +1624,7 @@ $tableData = json_decode($data->table_details, true);
 
 </style>
 
+
 {{-- PRODUCT SCHEMA START --}}
 
 @php
@@ -1634,10 +1635,25 @@ $tableData = json_decode($data->table_details, true);
         'url' => url()->current(),
     ];
 
-    // Main product image
-    if (!empty($data->product_header_image)) {
-        $productSchema['image'] = asset(
-            'public/product-images/' . $data->product_header_image
+    // Product images from table_details JSON
+    $tableData = json_decode($data->table_details ?? '[]', true);
+
+    $productImages = [];
+
+    if (is_array($tableData)) {
+        foreach ($tableData as $tab) {
+            if (!empty($tab['image'])) {
+                $productImages[] = asset(
+                    'public/product-images/' . $tab['image']
+                );
+            }
+        }
+    }
+
+    // Add images to schema if available
+    if (!empty($productImages)) {
+        $productSchema['image'] = array_values(
+            array_unique($productImages)
         );
     }
 
@@ -1664,6 +1680,7 @@ $tableData = json_decode($data->table_details, true);
         'name' => 'Allwin Cold Chain Solutions Pvt. Ltd.',
     ];
 
+    // Aggregate Rating
     $productSchema['aggregateRating'] = [
         '@type' => 'AggregateRating',
         'ratingValue' => '5',
