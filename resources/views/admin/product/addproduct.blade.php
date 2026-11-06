@@ -11,7 +11,7 @@
                 <h3 class="fw-bold mb-0">Product Add</h3>
             </div>
         </div>
-    </div> <!-- Row end -->
+    </div>
 
     <div class="card-body">
         <form method="post" enctype="multipart/form-data" action="{{ route('product.store') }}">
@@ -26,7 +26,6 @@
 
                         <div class="row g-3 align-items-center">
 
-                            <!-- Basic data element -->
                             <div class="col-md-6">
                                 <label class="form-label">Product Name</label>
                                 <input type="text" id="product_header" name="product_header" required class="form-control">
@@ -79,7 +78,6 @@
                     </div>
                     <div class="card mb-3 p-3">
 
-                        <!-- Initial Table Details Block -->
                         <div class="how-works-container">
                             <div id="how_works_fields">
                                 <div class="row g-3 how-works-row">
@@ -95,7 +93,7 @@
 
                                     <div class="col-md-6">
                                         <label class="form-label">Table Image <small class="text-muted">(optional - leave blank for content-only section)</small></label>
-                                        <input type="file" name="Table_image[]" class="form-control">
+                                        <input type="file" name="Table_image[]" class="form-control js-img-input" accept="image/*">
                                     </div>
 
                                     <div class="col-md-6">
@@ -103,15 +101,41 @@
                                         <input type="text" id="prod_img_alt[]" name="prod_img_alt[]" class="form-control">
                                     </div>
 
-                                    <!-- CTA fields (per table entry) -->
                                     <div class="col-md-6">
                                         <label class="form-label">CTA Title</label>
                                         <input type="text" name="cta_title[]" class="form-control">
                                     </div>
 
+                                    <div class="col-md-6">
+                                        <label class="form-label">CTA Banner Image <small class="text-muted">(optional)</small></label>
+                                        <input type="file" name="cta_image[]" class="form-control js-img-input" accept="image/*">
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="form-label">CTA Banner Image Alt</label>
+                                        <input type="text" name="cta_image_alt[]" class="form-control">
+                                    </div>
+
                                     <div class="col-md-12">
                                         <label class="form-label">CTA Description</label>
                                         <textarea name="cta_description[]" class="form-control summernote"></textarea>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="form-label">CTA Button Text</label>
+                                        <input type="text" name="cta_btn_text[]" class="form-control" placeholder="Enquire Now / Request a Quote">
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="form-label">CTA Button URL
+                                            <small class="text-muted">(use <b>#contactPanel</b> to open the enquiry popup, or a page URL. Empty = no button)</small>
+                                        </label>
+                                        <input type="text" name="cta_btn_url[]" class="form-control" placeholder="#contactPanel or /contact-us or https://...">
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label class="form-label">Table (HTML) <small class="text-muted">(optional - paste the table HTML in code view)</small></label>
+                                        <textarea name="table_html[]" class="form-control summernote"></textarea>
                                     </div>
 
                                     <div class="col-md-6">
@@ -122,7 +146,6 @@
                         </div>
                     </div>
 
-                    <!-- Submit Button -->
                     <button type="submit" class="btn btn-primary btn-set-task w-sm-100 py-2 px-5 text-uppercase mt-4">Save</button>
         </form>
     </div>
@@ -148,6 +171,13 @@
 <script src="{{ asset('public/admin_public/dist/assets/bundles/dropify.bundle.js') }}"></script>
 <script src="{{ asset('public/admin_public/dist/assets/bundles/dataTables.bundle.js') }}"></script>
 
+<style>
+    .img-box { position: relative; display: inline-block; margin-top: 8px; }
+    .img-box img { max-height: 100px; width: auto; border: 1px solid #ddd; border-radius: 6px; padding: 2px; background: #fff; }
+    .img-remove-btn { position: absolute; top: -9px; right: -9px; width: 22px; height: 22px; border: 0; border-radius: 50%;
+        background: #ff4d5e; color: #fff; font-size: 16px; line-height: 20px; padding: 0; cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,.3); }
+    .img-remove-btn:hover { background: #d62839; }
+</style>
 <script>
     $(document).ready(function() {
         initializeSummernoteForDescriptions();
@@ -155,7 +185,6 @@
 
     function initializeSummernoteForDescriptions() {
         $('.summernote').each(function() {
-            // avoid re-initializing an already-initialized editor
             if (!$(this).next('.note-editor').length) {
                 $(this).summernote({
                     placeholder: 'Enter Description here...',
@@ -191,7 +220,7 @@
 
                                     <div class="col-md-6">
                                         <label class="form-label">Table Image <small class="text-muted">(optional)</small></label>
-                                        <input type="file" name="Table_image[]" class="form-control">
+                                        <input type="file" name="Table_image[]" class="form-control js-img-input" accept="image/*">
                                     </div>
 
                                      <div class="col-md-6">
@@ -204,10 +233,38 @@
                                         <input type="text" name="cta_title[]" class="form-control">
                                     </div>
 
+                                    <div class="col-md-6">
+                                        <label class="form-label">CTA Banner Image <small class="text-muted">(optional)</small></label>
+                                        <input type="file" name="cta_image[]" class="form-control js-img-input" accept="image/*">
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="form-label">CTA Banner Image Alt</label>
+                                        <input type="text" name="cta_image_alt[]" class="form-control">
+                                    </div>
+
                                     <div class="col-md-12">
                                         <label class="form-label">CTA Description</label>
                                         <textarea name="cta_description[]" class="form-control summernote"></textarea>
                                     </div>
+
+                                    <div class="col-md-6">
+                                        <label class="form-label">CTA Button Text</label>
+                                        <input type="text" name="cta_btn_text[]" class="form-control" placeholder="Enquire Now / Request a Quote">
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="form-label">CTA Button URL
+                                            <small class="text-muted">(use <b>#contactPanel</b> to open the enquiry popup, or a page URL. Empty = no button)</small>
+                                        </label>
+                                        <input type="text" name="cta_btn_url[]" class="form-control" placeholder="#contactPanel or /contact-us or https://...">
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label class="form-label">Table (HTML) <small class="text-muted">(optional - paste the table HTML in code view)</small></label>
+                                        <textarea name="table_html[]" class="form-control summernote"></textarea>
+                                    </div>
+
              <div class="col-md-2">
             <button type="button" class="btn btn-danger remove-how-work">Remove</button>
             </div>
@@ -218,6 +275,21 @@
     });
     $(document).on('click', '.remove-how-work', function() {
         $(this).closest('.how-works-row').remove();
+    });
+
+    $(document).on('change', '.js-img-input', function () {
+        var $in = $(this);
+        $in.siblings('.js-new-preview').remove();
+        if (this.files && this.files[0]) {
+            var $box = $('<div class="img-box js-new-preview"><img alt=""><button type="button" class="img-remove-btn js-clear-new" title="Remove">&times;</button></div>');
+            $box.find('img').attr('src', URL.createObjectURL(this.files[0]));
+            $in.after($box);
+        }
+    });
+    $(document).on('click', '.js-clear-new', function () {
+        var $box = $(this).closest('.js-new-preview');
+        $box.siblings('.js-img-input').val('');
+        $box.remove();
     });
 </script>
 @endpush

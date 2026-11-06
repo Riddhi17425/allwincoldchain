@@ -11,17 +11,16 @@ class ProductController extends Controller
     public function index()
     {
         $data = Product::orderBy('created_at', 'desc')->where('is_delete', '0')->paginate(15);
-        // dd($data);
         return view('admin.product.productlisting', compact('data'));
     }
+
     public function create()
     {
         return view('admin.product.addproduct');
     }
+
     public function store(Request $request)
     {
-        // dd($request->all());
-
         $product = new Product();
         $product->product_header = $request->input('product_header');
         $product->title = $request->input('title');
@@ -35,16 +34,14 @@ class ProductController extends Controller
         if ($request->hasFile('product_header_image')) {
             $file = $request->file('product_header_image');
             $filename = $file->getClientOriginalName();
-            $path = public_path('/product-images');
-            $file->move($path, $filename);
+            $file->move(public_path('/product-images'), $filename);
             $product->product_header_image = $filename;
         }
 
         if ($request->hasFile('product_icon')) {
             $file = $request->file('product_icon');
             $filename = $file->getClientOriginalName();
-            $path = public_path('/product-images');
-            $file->move($path, $filename);
+            $file->move(public_path('/product-images'), $filename);
             $product->product_icon = $filename;
         }
 
@@ -55,25 +52,38 @@ class ProductController extends Controller
         $tableAlt = $request->input('prod_img_alt', []);
         $ctaTitles = $request->input('cta_title', []);
         $ctaDescs = $request->input('cta_description', []);
+        $ctaImages = $request->file('cta_image', []);
+        $ctaImageAlts = $request->input('cta_image_alt', []);
+        $ctaBtnTexts = $request->input('cta_btn_text', []);
+        $ctaBtnUrls = $request->input('cta_btn_url', []);
+        $tableHtmls = $request->input('table_html', []);
 
         foreach ($tableLabels as $index => $label) {
-            // Table Image is now optional - a section can be content-only (no image)
             $imageFilename = null;
-
             if (isset($tableImages[$index]) && $tableImages[$index]) {
                 $image = $tableImages[$index];
                 $imageFilename = $image->getClientOriginalName();
-                $imagePath = public_path('/product-images');
-                $image->move($imagePath, $imageFilename);
+                $image->move(public_path('/product-images'), $imageFilename);
+            }
+
+            $ctaImageName = null;
+            if (isset($ctaImages[$index]) && $ctaImages[$index]) {
+                $ctaImageName = $ctaImages[$index]->getClientOriginalName();
+                $ctaImages[$index]->move(public_path('/product-images'), $ctaImageName);
             }
 
             $tableData[] = [
-                'label' => $label,
-                'desc' => $tableDescs[$index] ?? '',
-                'image' => $imageFilename,
-                'alt' => $tableAlt[$index] ?? '',
-                'cta_title' => $ctaTitles[$index] ?? '',
-                'cta_desc' => $ctaDescs[$index] ?? '',
+                'label'         => $label,
+                'desc'          => $tableDescs[$index] ?? '',
+                'image'         => $imageFilename,
+                'alt'           => $tableAlt[$index] ?? '',
+                'cta_title'     => $ctaTitles[$index] ?? '',
+                'cta_desc'      => $ctaDescs[$index] ?? '',
+                'cta_image'     => $ctaImageName,
+                'cta_image_alt' => $ctaImageAlts[$index] ?? '',
+                'cta_btn_text'  => $ctaBtnTexts[$index] ?? '',
+                'cta_btn_url'   => trim($ctaBtnUrls[$index] ?? ''),
+                'table_html'    => $tableHtmls[$index] ?? '',
             ];
         }
         $product->table_details = json_encode($tableData);
@@ -83,108 +93,100 @@ class ProductController extends Controller
         return redirect('/admin/product')->with('success', 'Product Added Successfully');
     }
 
-
     public function edit($id)
     {
         $data = Product::find($id);
-        // dd($data);
         return view('admin.product.editproduct', compact('data'));
     }
 
     public function update(Request $request, $id)
     {
         $product = Product::find($id);
-    
+
         $product->product_header = $request->input('product_header');
         $product->title = $request->input('title');
         $product->prod_url = $request->input('prod_url');
         $product->product_desc = $request->input('product_desc');
         $product->meta_title = $request->input('meta_title');
         $product->meta_description = $request->input('meta_description');
-    
+
         if ($request->hasFile('product_header_image')) {
             $file = $request->file('product_header_image');
             $filename = $file->getClientOriginalName();
-            $path = public_path('/product-images');
-            $file->move($path, $filename);
+            $file->move(public_path('/product-images'), $filename);
             $product->product_header_image = $filename;
         }
-    
+
         if ($request->hasFile('product_icon')) {
             $file = $request->file('product_icon');
             $filename = $file->getClientOriginalName();
-            $path = public_path('/product-images');
-            $file->move($path, $filename);
+            $file->move(public_path('/product-images'), $filename);
             $product->product_icon = $filename;
         }
-    
+
         $tableLabels = $request->input('table_label', []);
         $tableDescs = $request->input('table_desc', []);
         $tableAlt = $request->input('prod_img_alt', []);
         $ctaTitles = $request->input('cta_title', []);
         $ctaDescs = $request->input('cta_description', []);
-        $existing_work_tab_images = json_decode($product->table_details, true) ?: [];
-    
-        if ($request->has('delete_img')) {
-            foreach ($request->delete_img as $deleteImage) {
-                foreach ($existing_work_tab_images as $index => $existingImage) {
-                    if (($existingImage['image'] ?? null) === $deleteImage) {
-                        // row removed via "Remove" button on the edit page - drop the whole entry
-                        unset($existing_work_tab_images[$index]);
-                        break;
-                    }
-                }
-            }
-            $existing_work_tab_images = array_values($existing_work_tab_images);
-        }
-    
+        $ctaImageAlts = $request->input('cta_image_alt', []);
+        $ctaBtnTexts = $request->input('cta_btn_text', []);
+        $ctaBtnUrls = $request->input('cta_btn_url', []);
+        $tableHtmls = $request->input('table_html', []);
+        $removeCtaImage = $request->input('remove_cta_image', []);
+        $removeImage = $request->input('remove_image', []);
+
+        $existingImages = $request->input('existing_image', []);
+        $existingCtaImages = $request->input('existing_cta_image', []);
+
         $tableImages = $request->file('table_image', []);
-        $maxEntries = max(count($tableLabels), count($tableDescs), count($tableImages));
-    
+        $ctaImages = $request->file('cta_image', []);
+
+        $maxEntries = max(count($tableLabels), count($tableDescs));
+        $newDetails = [];
+
         for ($index = 0; $index < $maxEntries; $index++) {
-            // Table Image is optional - keep existing image if no new one uploaded,
-            // otherwise leave it empty (content-only section)
+
             if (isset($tableImages[$index]) && $tableImages[$index]) {
                 $file = $tableImages[$index];
                 $filename = $file->getClientOriginalName();
-                $path = public_path('/product-images');
-                $file->move($path, $filename);
+                $file->move(public_path('/product-images'), $filename);
+            } elseif (!empty($removeImage[$index])) {
+                $filename = null;
             } else {
-                $filename = $existing_work_tab_images[$index]['image'] ?? null;
+                $filename = !empty($existingImages[$index]) ? $existingImages[$index] : null;
             }
-    
-            $existing_work_tab_images[$index] = [
-                // Label/desc/alt/cta_title/cta_desc are plain form fields that are ALWAYS
-                // submitted from the edit page for every row - they should never fall back
-                // to old DB data. Falling back caused stale values (e.g. an old CTA title)
-                // to keep reappearing after a no-image row was removed, because removing a
-                // row without an image doesn't trigger the delete_img[] reindex below, so
-                // old and new array indexes could drift out of sync.
-                'label' => $tableLabels[$index] ?? '',
-                'desc' => $tableDescs[$index] ?? '',
-                'image' => $filename,
-                'alt' => $tableAlt[$index] ?? '',
-                'cta_title' => $ctaTitles[$index] ?? '',
-                'cta_desc' => $ctaDescs[$index] ?? '',
+
+            if (isset($ctaImages[$index]) && $ctaImages[$index]) {
+                $ctaImageName = $ctaImages[$index]->getClientOriginalName();
+                $ctaImages[$index]->move(public_path('/product-images'), $ctaImageName);
+            } elseif (!empty($removeCtaImage[$index])) {
+                $ctaImageName = null;
+            } else {
+                $ctaImageName = !empty($existingCtaImages[$index]) ? $existingCtaImages[$index] : null;
+            }
+
+            $newDetails[] = [
+                'label'         => $tableLabels[$index] ?? '',
+                'desc'          => $tableDescs[$index] ?? '',
+                'image'         => $filename,
+                'alt'           => $tableAlt[$index] ?? '',
+                'cta_title'     => $ctaTitles[$index] ?? '',
+                'cta_desc'      => $ctaDescs[$index] ?? '',
+                'cta_image'     => $ctaImageName,
+                'cta_image_alt' => $ctaImageAlts[$index] ?? '',
+                'cta_btn_text'  => $ctaBtnTexts[$index] ?? '',
+                'cta_btn_url'   => trim($ctaBtnUrls[$index] ?? ''),
+                'table_html'    => $tableHtmls[$index] ?? '',
             ];
         }
-    
-        // Any leftover old entries beyond what was submitted (e.g. a no-image row that
-        // was removed on the edit page) must be dropped instead of silently kept.
-        $existing_work_tab_images = array_slice($existing_work_tab_images, 0, $maxEntries);
-    
-        $product->table_details = json_encode(array_values($existing_work_tab_images));
-    
+
+        $product->table_details = json_encode($newDetails);
+
         $product->save();
-    
+
         return redirect('/admin/product')->with('success', 'Product Updated Successfully');
     }
-    
-
-
-
-
-
 
     public function destroy($id)
     {

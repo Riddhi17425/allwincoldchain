@@ -6,7 +6,7 @@
     <div class="row">
       <div class="col-lg-6 m-auto">
         <div class="hero-heading-area heading1 text-center">
-          <h1>About us</h1>
+          <h1>About Allwin Cold Chain Solutions</h1>
           <a href="{{ url('/')}}" class="backline">Home <i class="fa-solid fa-angle-right"></i> <span>About us</span></a>
         </div>
       </div>
