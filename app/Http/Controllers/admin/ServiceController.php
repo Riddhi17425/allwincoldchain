@@ -32,7 +32,7 @@ class ServiceController extends Controller
         if ($request->hasFile('service_banner_image')) {
             $file = $request->file('service_banner_image');
             $filename = $file->getClientOriginalName();
-            $path = public_path('/Service images');
+            $path = public_path('/service-images');
             $file->move($path, $filename);
             $service->service_banner_image = $filename;
         }
@@ -48,7 +48,7 @@ class ServiceController extends Controller
         if ($request->hasFile('service_header_image')) {
             $file = $request->file('service_header_image');
             $filename = $file->getClientOriginalName();
-            $path = public_path('/Service images');
+            $path = public_path('/service-images');
             $file->move($path, $filename);
             $service->service_header_image = $filename;
         }
@@ -62,7 +62,7 @@ class ServiceController extends Controller
 
             foreach ($request->file('work_tab_image') as $file) {
                 $filename = $file->getClientOriginalName();
-                $path = public_path('/Service images');
+                $path = public_path('/service-images');
                 $file->move($path, $filename);
                 $work_tab_images[] = $filename;
             }
@@ -73,7 +73,7 @@ class ServiceController extends Controller
 
             foreach ($request->file('work_tab_icon') as $file) {
                 $filename = $file->getClientOriginalName();
-                $path = public_path('/Service images');
+                $path = public_path('/service-images');
                 $file->move($path, $filename);
                 $work_tab_icons[] = $filename;
             }
@@ -95,7 +95,7 @@ class ServiceController extends Controller
         if ($request->hasFile('wall_image')) {
             $file = $request->file('wall_image');
             $filename = $file->getClientOriginalName();
-            $path = public_path('/Service images');
+            $path = public_path('/service-images');
             $file->move($path, $filename);
             $service->wall_image = $filename;
         }
@@ -113,7 +113,7 @@ class ServiceController extends Controller
         if ($request->hasFile('key_image')) {
             $file = $request->file('key_image');
             $filename = $file->getClientOriginalName();
-            $path = public_path('/Service images');
+            $path = public_path('/service-images');
             $file->move($path, $filename);
             $service->key_image = $filename;
         }
@@ -151,7 +151,7 @@ class ServiceController extends Controller
         if ($request->hasFile('service_banner_image')) {
             $file = $request->file('service_banner_image');
             $filename = $file->getClientOriginalName();
-            $path = public_path('/Service images');
+            $path = public_path('/service-images');
             $file->move($path, $filename);
             $service->service_banner_image = $filename;
         }
@@ -159,7 +159,7 @@ class ServiceController extends Controller
         if ($request->hasFile('service_header_image')) {
             $file = $request->file('service_header_image');
             $filename = $file->getClientOriginalName();
-            $path = public_path('/Service images');
+            $path = public_path('/service-images');
             $file->move($path, $filename);
             $service->service_header_image = $filename;
         }
@@ -191,7 +191,7 @@ class ServiceController extends Controller
             if (isset($workTabImages[$index])) {
                 $imageFile = $workTabImages[$index];
                 $imageFilename = $imageFile->getClientOriginalName();
-                $imagePath = public_path('/Service images');
+                $imagePath = public_path('/service-images');
                 $imageFile->move($imagePath, $imageFilename);
             } else {
                 $imageFilename = $existing_work_tab_images[$index]['work_tab_images'] ?? null;
@@ -200,7 +200,7 @@ class ServiceController extends Controller
             if (isset($workTabIcons[$index])) {
                 $iconFile = $workTabIcons[$index];
                 $iconFilename = $iconFile->getClientOriginalName();
-                $iconPath = public_path('/Service images');
+                $iconPath = public_path('/service-images');
                 $iconFile->move($iconPath, $iconFilename);
             } else {
                 $iconFilename = $existing_work_tab_images[$index]['work_tab_icons'] ?? null;
@@ -223,7 +223,7 @@ class ServiceController extends Controller
         if ($request->hasFile('wall_image')) {
             $file = $request->file('wall_image');
             $filename = $file->getClientOriginalName();
-            $path = public_path('/Service images');
+            $path = public_path('/service-images');
             $file->move($path, $filename);
             $service->wall_image = $filename;
         }
@@ -244,7 +244,7 @@ class ServiceController extends Controller
         if ($request->hasFile('key_image')) {
             $file = $request->file('key_image');
             $filename = $file->getClientOriginalName();
-            $path = public_path('/Service images');
+            $path = public_path('/service-images');
             $file->move($path, $filename);
             $service->key_image = $filename;
         }
