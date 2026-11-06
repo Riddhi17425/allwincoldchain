@@ -9,7 +9,7 @@
                     <a href="{{ url('/')}}" class="backline">Home
                         <i class="fa-solid fa-angle-right"></i><span>{{$data->title}}</span>
                     </a>
-                </div> 
+                </div>
             </div>
         </div>
     </div>
@@ -20,7 +20,6 @@
             <div class="col-lg-4">
                 <div class="work-header-area heading2">
                     <h5 data-aos="fade-left" data-aos-duration="800" class="aos-init aos-animate">How it works</h5>
-                    <!-- <h2 class="tg-element-title" style="perspective: 400px;">{{$data->work_title}}</h2> -->
                     <h2 class="tg-element-title" style="perspective: 400px;">{{$data->heading}}</h2>
                     <p data-aos="fade-left" data-aos-duration="1000" class="aos-init">{{$data->work_desc}}</p>
 
@@ -63,7 +62,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
@@ -130,7 +128,6 @@
                         </div>
                         @endif
                         @endif
-
                     </div>
                 </div>
             </div>

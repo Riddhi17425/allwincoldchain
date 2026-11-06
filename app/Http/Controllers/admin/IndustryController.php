@@ -37,7 +37,8 @@ class IndustryController extends Controller
         if ($request->hasFile('industry_header_image')) {
             $file = $request->file('industry_header_image');
             $filename = $file->getClientOriginalName();
-            $path = public_path('/Industry images');
+            // $path = public_path('/Industry images');
+            $path = public_path('/industry-images');
             $file->move($path, $filename);
             $industry->industry_header_image = $filename;
         }
@@ -51,7 +52,8 @@ class IndustryController extends Controller
 
             foreach ($request->file('work_tab_image') as $file) {
                 $filename = $file->getClientOriginalName();
-                $path = public_path('/Industry images');
+                // $path = public_path('/Industry images');
+                $path = public_path('/industry-images');
                 $file->move($path, $filename);
                 $work_tab_images[] = $filename;
             }
@@ -62,7 +64,8 @@ class IndustryController extends Controller
 
             foreach ($request->file('work_tab_icon') as $file) {
                 $filename = $file->getClientOriginalName();
-                $path = public_path('/Industry images');
+                // $path = public_path('/Industry images');
+                $path = public_path('/industry-images');
                 $file->move($path, $filename);
                 $work_tab_icons[] = $filename;
             }
@@ -85,7 +88,8 @@ class IndustryController extends Controller
         if ($request->hasFile('wall_image')) {
             $file = $request->file('wall_image');
             $filename = $file->getClientOriginalName();
-            $path = public_path('/Industry images');
+            // $path = public_path('/Industry images');
+            $path = public_path('/industry-images');
             $file->move($path, $filename);
             $industry->wall_image = $filename;
         }
@@ -103,7 +107,7 @@ class IndustryController extends Controller
         if ($request->hasFile('key_image')) {
             $file = $request->file('key_image');
             $filename = $file->getClientOriginalName();
-            $path = public_path('/Industry images');
+            $path = public_path('/industry-images');
             $file->move($path, $filename);
             $industry->key_image = $filename;
         }
@@ -141,7 +145,7 @@ class IndustryController extends Controller
         if ($request->hasFile('industry_header_image')) {
             $file = $request->file('industry_header_image');
             $filename = $file->getClientOriginalName();
-            $path = public_path('/Industry images');
+            $path = public_path('/industry-images');
             $file->move($path, $filename);
             $industry->industry_header_image = $filename;
         }
@@ -172,7 +176,7 @@ class IndustryController extends Controller
             if (isset($workTabImages[$index])) {
                 $imageFile = $workTabImages[$index];
                 $imageFilename = $imageFile->getClientOriginalName();
-                $imagePath = public_path('/Industry images');
+                $imagePath = public_path('/industry-images');
                 $imageFile->move($imagePath, $imageFilename);
             } else {
                 $imageFilename = $existing_work_tab_images[$index]['work_tab_images'] ?? null;
@@ -181,7 +185,7 @@ class IndustryController extends Controller
             if (isset($workTabIcons[$index])) {
                 $iconFile = $workTabIcons[$index];
                 $iconFilename = $iconFile->getClientOriginalName();
-                $iconPath = public_path('/Industry images');
+                $iconPath = public_path('/industry-images');
                 $iconFile->move($iconPath, $iconFilename);
             } else {
                 $iconFilename = $existing_work_tab_images[$index]['work_tab_icon'] ?? null;
@@ -205,7 +209,7 @@ class IndustryController extends Controller
         if ($request->hasFile('wall_image')) {
             $file = $request->file('wall_image');
             $filename = $file->getClientOriginalName();
-            $path = public_path('/Industry images');
+            $path = public_path('/industry-images');
             $file->move($path, $filename);
             $industry->wall_image = $filename;
         }
@@ -224,7 +228,7 @@ class IndustryController extends Controller
         if ($request->hasFile('key_image')) {
             $file = $request->file('key_image');
             $filename = $file->getClientOriginalName();
-            $path = public_path('/Industry images');
+            $path = public_path('/industry-images');
             $file->move($path, $filename);
             $industry->key_image = $filename;
         }
