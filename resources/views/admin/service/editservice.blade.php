@@ -34,7 +34,7 @@
                             <input type="file" name="service_header_image" value="{{$data->service_header_image}}" class="form-control">
 
                             <div class="image-container d-flex align-items-center mb-2">
-                                <img src="{{ asset('public/Service images/' . $data->service_header_image) }}" width="100" class="me-2">
+                                <img src="{{ asset('public/service-images/' . $data->service_header_image) }}" width="100" class="me-2">
                             </div>
 
                         </div>
@@ -77,7 +77,7 @@
                             <label class="form-label">Service Banner Image</label>
                             <input type="file" name="service_banner_image"  class="form-control">
                             <div class="image-container d-flex align-items-center mb-2">
-                                <img src="{{ asset('public/Service images/' . $data->service_banner_image) }}" width="100" class="me-2">
+                                <img src="{{ asset('public/service-images/' . $data->service_banner_image) }}" width="100" class="me-2">
                             </div>
 
                         </div>
@@ -125,7 +125,7 @@
                                         @if($td['work_tab_images'])
                                         @foreach(explode(',', $td['work_tab_images']) as $img)
                                         <div class="image-container_tab d-flex align-items-center mb-2">
-                                            <img src="{{ asset('public/Service images/' . $img) }}" width="100" class="me-2">
+                                            <img src="{{ asset('public/service-images/' . $img) }}" width="100" class="me-2">
                                         </div>
                                         @endforeach
                                         @endif
@@ -137,7 +137,7 @@
                                         @if($td['work_tab_icons'])
                                         @foreach(explode(',', $td['work_tab_icons']) as $img)
                                         <div class="image-container_tab d-flex align-items-center mb-2">
-                                            <img src="{{ asset('public/Service images/' . $img) }}" width="100" class="me-2">
+                                            <img src="{{ asset('public/service-images/' . $img) }}" width="100" class="me-2">
                                         </div>
                                         @endforeach
                                         @endif
@@ -211,7 +211,7 @@
                                     <div class="col-md-5">
                                         <input type="file" name="key_image" value="{{$data->key_image}}" class="form-control">
                                         <div class="image-container d-flex align-items-center mb-2">
-                                            <img src="{{ asset('public/Service images/' . $data->key_image) }}" width="100" class="me-2">
+                                            <img src="{{ asset('public/service-images/' . $data->key_image) }}" width="100" class="me-2">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
