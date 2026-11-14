@@ -63,7 +63,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!--Local Schema-->
 <script type="application/ld+json">
 {
-"@context": "https://schema.org",
+"@@context": "https://schema.org",
 "@type": "LocalBusiness",
 "name": "Allwin Cold Chain Solutions",
 "image":

@@ -143,7 +143,7 @@
     const fullNumber = iti.getNumber();
     const messageText = document.getElementById("user-message").value;
 
-    fetch('/whatsapp-store', {
+    fetch("{{ url('/whatsapp-store') }}", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
