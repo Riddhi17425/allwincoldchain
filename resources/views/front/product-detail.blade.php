@@ -7,12 +7,16 @@
             <div class="col-lg-7 m-auto">
                 <div class="hero-heading-area heading1 text-center">
                     <h1>{{$data->title}}</h1>
-                    <a href="{{ url('/')}}" class="backline">Home <i class="fa-solid fa-angle-right"></i><span>{{$data->title}}</span></a>
+                    <div class="backline">
+                    <a href="{{ url('/')}}">Home </a><i class="fa-solid fa-angle-right"></i><span>{{$data->title}}</span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
 
 @php
     $tableData = json_decode($data->table_details ?? '[]', true);
@@ -60,7 +64,10 @@
                         {{ $tab['label'] }}
                     </h2>
                     @endif
-                    <div class="content-only-body">{!! $tab['desc'] ?? '' !!}</div>
+                    <!--<div class="content-only-body">{!! $tab['desc'] ?? '' !!}</div>-->
+                    <div class="content-only-body" data-aos="fade-left" data-aos-duration="1000">
+    {!! $tab['desc'] ?? '' !!}
+</div>
                     @include('layouts.product-cta', ['tab' => $tab, 'mode' => 'button'])
                 </div>
             </div>
@@ -88,7 +95,7 @@
 @endif
 
 @if($data->prod_url == 'reusable-cold-chain-shippers' && $index == 0)
-<h2 class="tg-element-title text-center" style="font-size:42px">Made to Order and Standard Size Available</h2>
+<!--<h2 class="tg-element-title text-center" style="font-size:42px">Made to Order and Standard Size Available</h2>-->
 @endif
 
 @endforeach
@@ -104,11 +111,11 @@
             <div class="accordion accordion-flush active" id="accordionFlushExample">
                 @foreach($faqs as $index => $faq)
                 <div class="accordion-item aos-init faq-custom-item" data-aos="fade-left" data-aos-duration="800">
-                    <h2 class="accordion-header">
+                    <h3 class="accordion-header">
                         <button class="accordion-button faq-custom-button {{ $index != 0 ? 'collapsed' : '' }}" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{ $index }}" aria-expanded="{{ $index == 0 ? 'true' : 'false' }}" aria-controls="flush-collapse{{ $index }}">
                             {{ $faq['title'] }}
                         </button>
-                    </h2>
+                    </h3>
                     <div id="flush-collapse{{ $index }}" class="accordion-collapse collapse {{ $index == 0 ? 'show' : '' }}" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body faq-custom-body">{{ $faq['description'] }}</div>
                     </div>
