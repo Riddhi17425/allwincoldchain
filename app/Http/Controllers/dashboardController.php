@@ -83,21 +83,21 @@ class dashboardController extends Controller
         return view('front.blog',compact('metatitle', 'metadescription','blogs'));
       }
     
-    public function blogsdetail($url)
-    {
-        
-        $blogsdetail = Blogs::whereNull('deleted_at')
-                  //->where('status', 'Active')
-                  ->where('url', $url)
-                  ->firstOrFail();
-        $faqs = json_decode($blogsdetail->title_description, true);
-        //dd($faqs);
-        $metatitle = $blogsdetail->meta_title ?? $blogsdetail->title;
-        $metadescription = $blogsdetail->meta_description ?? Str::limit(strip_tags($blogsdetail->description));
-        $fileName = $blogsdetail->front_image ? rawurlencode($blogsdetail->front_image) : asset('public/home-page-images/banner-1.webp');
-        $og_image = url('public/blogs/front_image/'.$fileName);
-        
-        return view('front.blog-detail',compact('metatitle', 'metadescription','blogsdetail','faqs', 'og_image'));
-    }
+      public function blogsdetail($url)
+      {
+            
+            $blogsdetail = Blogs::whereNull('deleted_at')
+                        //->where('status', 'Active')
+                        ->where('url', $url)
+                        ->firstOrFail();
+            $faqs = json_decode($blogsdetail->title_description, true);
+            //dd($faqs);
+            $metatitle = $blogsdetail->meta_title ?? $blogsdetail->title;
+            $metadescription = $blogsdetail->meta_description ?? Str::limit(strip_tags($blogsdetail->description));
+            $fileName = $blogsdetail->front_image ? rawurlencode($blogsdetail->front_image) : asset('public/home-page-images/banner-1.webp');
+            $og_image = url('public/blogs/front_image/'.$fileName);
+            
+            return view('front.blog-detail',compact('metatitle', 'metadescription','blogsdetail','faqs', 'og_image'));
+      } 
 
-}
+}   
