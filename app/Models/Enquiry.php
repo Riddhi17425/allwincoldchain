@@ -16,5 +16,8 @@ class Enquiry extends Model
         'phone',
         'email',
         'details',
+        'company', 
+        'product', 
+        'temperature'
     ];
 }

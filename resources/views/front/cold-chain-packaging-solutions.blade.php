@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, follow">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Allwin Cold Chain Packaging Solutions</title>
+    <meta name="description"
+        content="Cold chain packaging solutions for safe, temperature-controlled shipping. Insulated shippers, PCM ice packs, VIP packaging and temperature data loggers.">
+    <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
+    <link rel="icon" href="{{ asset('public/assets/img/favicon.svg') }}" type="image/svg+xml">
+    <link rel="icon" href="{{ asset('public/assets/img/favicon-32.png') }}" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="{{ asset('public/assets/img/apple-touch-icon.png') }}">
+    <meta name="theme-color" content="#0a66c6">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('public/assets/css/style.css') }}">
+</head>
+
+<body>
+
+    {{-- SVG sprite --}}
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <defs>
+            <symbol id="i-arrow" viewBox="0 0 24 24">
+                <path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4"
+                    stroke-linecap="round" stroke-linejoin="round" />
+            </symbol>
+            <symbol id="i-chev" viewBox="0 0 24 24">
+                <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </symbol>
+            <symbol id="i-check" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="11" fill="currentColor" />
+                <path d="M7 12.3l3.3 3.3L17 9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </symbol>
+            <symbol id="i-check-o" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2" />
+                <path d="M7.5 12.3l3 3 6-6.3" fill="none" stroke="currentColor" stroke-width="2.2"
+                    stroke-linecap="round" stroke-linejoin="round" />
+            </symbol>
+            <symbol id="i-phone" viewBox="0 0 24 24">
+                <path
+                    d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 013 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"
+                    fill="currentColor" />
+            </symbol>
+            <symbol id="i-wa" viewBox="0 0 32 32">
+                <circle cx="16" cy="16" r="16" fill="#25D366" />
+                <path
+                    d="M23.3 8.7A10.3 10.3 0 007.1 21.1L5.7 26.3l5.3-1.4a10.3 10.3 0 004.9 1.3 10.3 10.3 0 007.3-17.5zM16 24.4a8.5 8.5 0 01-4.4-1.2l-.3-.2-3.2.8.9-3.1-.2-.3A8.6 8.6 0 1116 24.4zm4.7-6.4c-.3-.1-1.5-.8-1.8-.8-.2-.1-.4-.1-.6.1l-.8 1c-.2.2-.3.2-.6.1a7 7 0 01-3.5-3c-.3-.5.3-.4.8-1.4.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.5-.3z"
+                    fill="#fff" />
+            </symbol>
+            <symbol id="i-play" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="11" fill="currentColor" />
+                <path d="M10 8l6 4-6 4z" fill="#fff" />
+            </symbol>
+            <symbol id="i-send" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="12" fill="currentColor" />
+                <path d="M17.5 6.5L5.8 11.2l4.4 1.6 1.6 4.6 5.7-10.9zM10.2 12.8l3.6-3" fill="#fff" stroke="#fff"
+                    stroke-width=".6" stroke-linejoin="round" />
+            </symbol>
+            <symbol id="i-lock" viewBox="0 0 24 24">
+                <path d="M6 10V8a6 6 0 1112 0v2h1v12H5V10h1zm2 0h8V8a4 4 0 10-8 0v2z" fill="currentColor" />
+            </symbol>
+            <symbol id="i-snow" viewBox="0 0 48 48">
+                <g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M24 4v40M6.7 14l34.6 20M6.7 34l34.6-20" />
+                    <path
+                        d="M18.5 7.5L24 12l5.5-4.5M18.5 40.5L24 36l5.5 4.5M7 21.5l7-1.2-2.7-6.6M41 26.5l-7 1.2 2.7 6.6M7 26.5l7 1.2-2.7 6.6M41 21.5l-7-1.2 2.7-6.6" />
+                </g>
+            </symbol>
+            <symbol id="i-shield" viewBox="0 0 48 48">
+                <g fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M24 4l16 6v12c0 10-6.8 18.4-16 22C14.8 40.4 8 32 8 22V10l16-6z" />
+                    <path d="M16.5 24l5.5 5.5 10-11" />
+                </g>
+            </symbol>
+            <symbol id="i-factory" viewBox="0 0 48 48">
+                <g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round">
+                    <path d="M4 44h40" />
+                    <rect x="7" y="22" width="9" height="22" />
+                    <rect x="19" y="10" width="10" height="34" />
+                    <rect x="32" y="26" width="9" height="18" />
+                    <path d="M24 4v6M22 15h4M22 21h4M22 27h4M10 28h3M10 34h3M35 32h3" />
+                </g>
+            </symbol>
+            <symbol id="i-headset" viewBox="0 0 48 48">
+                <g fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M8 26v-3a16 16 0 0132 0v3" />
+                    <rect x="5" y="25" width="8" height="12" rx="3" />
+                    <rect x="35" y="25" width="8" height="12" rx="3" />
+                    <path d="M39 37c0 4.5-4 7-10 7h-3" />
+                </g>
+            </symbol>
+            <symbol id="i-thermo" viewBox="0 0 48 48">
+                <g fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round">
+                    <path d="M19 28V9a5 5 0 0110 0v19a9 9 0 11-10 0z" />
+                    <path d="M24 17v15" stroke-width="4" />
+                    <circle cx="24" cy="35" r="3.5" fill="currentColor" />
+                    <path d="M33 12h4M33 18h4M33 24h4" stroke-width="2.2" />
+                </g>
+            </symbol>
+            <symbol id="i-sun" viewBox="0 0 48 48">
+                <circle cx="24" cy="24" r="9" fill="currentColor" />
+                <g stroke="currentColor" stroke-width="3" stroke-linecap="round">
+                    <path
+                        d="M24 4v6M24 38v6M4 24h6M38 24h6M9.9 9.9l4.2 4.2M33.9 33.9l4.2 4.2M9.9 38.1l4.2-4.2M33.9 14.1l4.2-4.2" />
+                </g>
+            </symbol>
+            <symbol id="i-pills" viewBox="0 0 48 48">
+                <g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="6" y="18" width="24" height="12" rx="6" transform="rotate(-40 18 24)" />
+                    <path d="M14.5 17l7.7 9.2" />
+                    <circle cx="33" cy="32" r="8" />
+                    <path d="M27.5 37.5l11-11" />
+                </g>
+            </symbol>
+            <symbol id="i-apple" viewBox="0 0 48 48">
+                <g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M24 15c-4-3-12-2.5-13 6-1 8 5 19 9 19 2 0 2.5-1 4-1s2 1 4 1c4 0 10-11 9-19-1-8.5-9-9-13-6z" />
+                    <path d="M24 15c0-4 2-7 6-8" />
+                </g>
+            </symbol>
+            <symbol id="i-health" viewBox="0 0 48 48">
+                <g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round">
+                    <path d="M18 6h12v12h12v12H30v12H18V30H6V18h12z" />
+                </g>
+            </symbol>
+            <symbol id="i-flask" viewBox="0 0 48 48">
+                <g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 5h12M20 5v13L9 38a4 4 0 003.5 6h23a4 4 0 003.5-6L28 18V5" />
+                    <path d="M14 30h20" />
+                </g>
+            </symbol>
+            <symbol id="i-truck" viewBox="0 0 48 48">
+                <g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 12h26v22H3zM29 20h8l7 7v7H29z" />
+                    <circle cx="12" cy="36" r="4" fill="#0e2a52" />
+                    <circle cx="36" cy="36" r="4" fill="#0e2a52" />
+                </g>
+            </symbol>
+            <symbol id="i-globe" viewBox="0 0 48 48">
+                <g fill="none" stroke="currentColor" stroke-width="2.6">
+                    <circle cx="24" cy="24" r="19" />
+                    <path d="M5 24h38M24 5c5.5 5.5 8 12 8 19s-2.5 13.5-8 19c-5.5-5.5-8-12-8-19s2.5-13.5 8-19z" />
+                </g>
+            </symbol>
+            <symbol id="i-crown" viewBox="0 0 48 48">
+                <g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round">
+                    <path d="M8 16l8 7 8-12 8 12 8-7-3 22H11z" fill="currentColor" fill-opacity=".15" />
+                    <path d="M11 42h26" />
+                </g>
+            </symbol>
+            <symbol id="i-star" viewBox="0 0 24 24">
+                <path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"
+                    fill="currentColor" />
+            </symbol>
+            <symbol id="i-mail" viewBox="0 0 24 24">
+                <g fill="none" stroke="currentColor" stroke-width="1.8">
+                    <rect x="3" y="5" width="18" height="14" rx="2" />
+                    <path d="M3.5 6l8.5 7 8.5-7" />
+                </g>
+            </symbol>
+            <symbol id="i-plus" viewBox="0 0 24 24">
+                <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" />
+            </symbol>
+            <symbol id="i-quote" viewBox="0 0 48 48">
+                <path
+                    d="M10 34c-3-2-4-5-4-8 0-7 5-12 11-13l1 3c-4 1-6 4-6 7h4a5 5 0 010 10c-2.5 0-4.5-.5-6-1zm20 0c-3-2-4-5-4-8 0-7 5-12 11-13l1 3c-4 1-6 4-6 7h4a5 5 0 010 10c-2.5 0-4.5-.5-6-1z"
+                    fill="currentColor" />
+            </symbol>
+            <symbol id="i-in" viewBox="0 0 24 24">
+                <path
+                    d="M6.5 9H4v11h2.5zM5.2 4a1.5 1.5 0 100 3 1.5 1.5 0 000-3zM20 13.6c0-3-1.6-4.8-4-4.8-1.5 0-2.4.8-2.8 1.5V9H11v11h2.5v-6c0-1.4.7-2.4 2-2.4s1.9 1 1.9 2.4v6H20z"
+                    fill="currentColor" />
+            </symbol>
+            <symbol id="i-fb" viewBox="0 0 24 24">
+                <path
+                    d="M13.5 21v-7.6h2.6l.4-3h-3V8.5c0-.9.3-1.5 1.5-1.5h1.6V4.3c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H8v3h2.5V21z"
+                    fill="currentColor" />
+            </symbol>
+            <symbol id="i-pin" viewBox="0 0 24 24">
+                <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+                    <path d="M12 21s7-6.2 7-11.5A7 7 0 005 9.5C5 14.800 12 21 12 21z" />
+                    <circle cx="12" cy="9.500" r="2.500" />
+                </g>
+            </symbol>
+            <symbol id="i-ig" viewBox="0 0 24 24">
+                <g fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="18" height="18" rx="5" />
+                    <circle cx="12" cy="12" r="4" />
+                </g>
+                <circle cx="17.3" cy="6.7" r="1.2" fill="currentColor" />
+            </symbol>
+        </defs>
+    </svg>
+
+    {{-- ============ HEADER ============ --}}
+    <header class="header" id="header">
+        <div class="container header__inner">
+            <a href="{{ url('/') }}" class="logo" aria-label="Allwin Cold Chain Solutions">
+                <img src="{{ asset('public/assets/img/logo-allwin.svg') }}" alt="Allwin Cold Chain Solutions"
+                    width="258" height="65">
+            </a>
+
+            <nav class="nav" id="nav" aria-label="Main">
+                <ul class="nav__list">
+                    <li class="nav__item has-drop">
+                        <a href="#solutions" class="nav__link">Products <svg>
+                                <use href="#i-chev" />
+                            </svg></a>
+                        <ul class="drop">
+                            <li><a href="#solutions">Single-Use Shippers</a></li>
+                            <li><a href="#solutions">Reusable Shippers</a></li>
+                            <li><a href="#solutions">PCM Ice Packs</a></li>
+                            <li><a href="#solutions">Data Loggers</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav__item has-drop">
+                        <a href="#industries" class="nav__link">Applications <svg>
+                                <use href="#i-chev" />
+                            </svg></a>
+                        <ul class="drop">
+                            <li><a href="#industries">Pharmaceutical</a></li>
+                            <li><a href="#industries">Healthcare</a></li>
+                            <li><a href="#industries">Laboratories</a></li>
+                            <li><a href="#industries">Logistics &amp; E-commerce</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav__item has-drop">
+                        <a href="{{ url('/contact-us') }}" class="nav__link nav__link--muted">Contact Us</a>
+                    </li>
+                </ul>
+                <div class="nav__mobile-cta">
+                    <a href="tel:+919687640805" class="header__phone"><svg>
+                            <use href="#i-phone" />
+                        </svg>+91 96876 40805</a>
+                    <a href="#enquire" class="btn btn--primary" data-quote>Get a Free Quote <svg>
+                            <use href="#i-arrow" />
+                        </svg></a>
+                </div>
+            </nav>
+
+            <div class="header__actions">
+                <a href="tel:+919687640805" class="header__phone"><svg>
+                        <use href="#i-phone" />
+                    </svg>+91 96876 40805</a>
+                <a href="https://wa.me/919687640805" class="wa" aria-label="WhatsApp" target="_blank"
+                    rel="noopener"><svg>
+                        <use href="#i-wa" />
+                    </svg></a>
+                <a href="#enquire" class="btn btn--primary btn--sm" data-quote>Get a Free Quote <svg>
+                        <use href="#i-arrow" />
+                    </svg></a>
+            </div>
+
+            <button class="burger" id="burger" aria-label="Open menu"
+                aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+    </header>
+
+    <main>
+        {{-- ============ HERO ============ --}}
+        <section class="hero">
+            <div class="hero__bg" aria-hidden="true">
+                {{-- Large screens: one background image (snowy mountains + Allwin products) --}}
+                <div class="hero__photo"></div>
+                {{-- Smaller screens: same scene built from layers so the product never hides behind text/form --}}
+                <svg class="hero__mountains" viewBox="0 0 1920 640" preserveAspectRatio="xMidYMax slice">
+                    <defs>
+                        <linearGradient id="mtFar" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0" stop-color="#9fc3ea" />
+                            <stop offset="1" stop-color="#d7e8f9" stop-opacity="0" />
+                        </linearGradient>
+                        <linearGradient id="mtLit" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0" stop-color="#ffffff" />
+                            <stop offset=".55" stop-color="#e3eefa" />
+                            <stop offset="1" stop-color="#c9ddf3" stop-opacity=".1" />
+                        </linearGradient>
+                        <linearGradient id="mtShade" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0" stop-color="#7ea8db" />
+                            <stop offset=".6" stop-color="#a9c7ea" />
+                            <stop offset="1" stop-color="#d4e5f7" stop-opacity=".1" />
+                        </linearGradient>
+                        <linearGradient id="mtGround" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0" stop-color="#ffffff" stop-opacity="0" />
+                            <stop offset=".45" stop-color="#f4f9fe" stop-opacity=".9" />
+                            <stop offset="1" stop-color="#e6f0fb" />
+                        </linearGradient>
+                    </defs>
+                    <g class="mt-far">
+                        <path
+                            d="M560 640L720 470l70 40 110-130 80 60 120-170 90 110 80-60 120 140 100-120 120 150 110-110 120 120 110-150 90 90V640z"
+                            fill="url(#mtFar)" opacity=".75" />
+                    </g>
+                    <g class="mt-mid">
+                        <path d="M760 640L960 300l60 70 90 270z" fill="url(#mtLit)" />
+                        <path d="M960 300l40 30 30-20 80 120 30-10 110 220H1110z" fill="url(#mtShade)" opacity=".85" />
+                        <path d="M1180 640l200-420 50 60 40-30 30 390z" fill="url(#mtLit)" />
+                        <path d="M1380 220l50 60 40-30 120 160 40-20 130 250H1500z" fill="url(#mtShade)" opacity=".9" />
+                        <path d="M1640 640l170-330 40 40 70-60V640z" fill="url(#mtLit)" />
+                        <path d="M1810 310l40 40 70-60v350h-110z" fill="url(#mtShade)" opacity=".7" />
+                    </g>
+                    <path class="mt-ground" d="M0 640V520q260-40 560-10t620 20q330-10 520-50t220-20V640z"
+                        fill="url(#mtGround)" />
+                </svg>
+                <span class="snow"></span>
+            </div>
+
+            <div class="container hero__inner">
+                <div class="hero__content">
+                    <span class="badge" data-anim="fade-up">Allwin Cold Chain Solutions</span>
+                    <h1 class="hero__title" data-anim="fade-up" data-delay="100">Cold Chain Packaging Solutions for
+                        Safe, <span><b class="nw">Temperature-Controlled</b> Shipping</span></h1>
+                    <p class="hero__text" data-anim="fade-up" data-delay="200">Protect temperature-sensitive products
+                        with reliable insulated packaging for pharmaceuticals, healthcare, food and logistics
+                        applications.</p>
+                    <ul class="checklist" data-anim="fade-up" data-delay="300">
+                        <li><svg>
+                                <use href="#i-check" />
+                            </svg>Single-use and reusable insulated shippers</li>
+                        <li><svg>
+                                <use href="#i-check" />
+                            </svg>PCM-based ice packs and chill pads</li>
+                        <li><svg>
+                                <use href="#i-check" />
+                            </svg>Custom temperature-controlled packaging</li>
+                    </ul>
+                    <div class="hero__btns" data-anim="fade-up" data-delay="400">
+                        <a href="#enquire" class="btn btn--primary btn--lg" data-quote>Request a Free Quote <svg>
+                                <use href="#i-arrow" />
+                            </svg></a>
+                    </div>
+                </div>
+
+                <div class="hero__media" data-anim="zoom" data-delay="200">
+                    <img src="{{ asset('public/assets/img/hero-product-final.webp') }}"
+                        alt="Allwin insulated cold chain boxes, pallet shipper, PCM coolant packs and ice packs"
+                        class="float" width="1338" height="1000">
+                </div>
+
+                <aside class="enquire" id="enquire" data-anim="fade-left" data-delay="300">
+                    <h2 class="enquire__title"><svg>
+                            <use href="#i-send" />
+                        </svg>Enquire Now</h2>
+                    <p class="enquire__sub">Get expert advice and the right solution for your cold chain needs.</p>
+                    <form class="form" id="quoteForm" method="POST" action="{{ route('enquiry.store') }}" novalidate>
+                        @csrf
+                        <input type="text" name="website_url" tabindex="-1" autocomplete="off" aria-hidden="true"
+                            style="position:absolute;left:-9999px;opacity:0;height:0;width:0">
+                        <input type="text" name="name" placeholder="Full Name *" required aria-label="Full Name"
+                            value="{{ old('name') }}">
+                        <input type="text" name="company" placeholder="Company Name *" required
+                            aria-label="Company Name" value="{{ old('company') }}">
+                        <input type="email" name="email" placeholder="Business Email *" required
+                            aria-label="Business Email" value="{{ old('email') }}">
+                        <input type="tel" name="phone" placeholder="Contact Number *" required
+                            aria-label="Contact Number" pattern="[0-9+\s\-]{7,15}" value="{{ old('phone') }}">
+                        <div class="select">
+                            <select name="product" aria-label="Product Requirement">
+                                <option value="" selected disabled hidden>Product Requirement</option>
+                                <option>Single-Use Cold Chain Packaging</option>
+                                <option>Reusable Cold Chain Shippers</option>
+                                <option>PCM Ice Packs / Chill Pads</option>
+                                <option>Temperature Data Loggers</option>
+                            </select>
+                            <svg>
+                                <use href="#i-chev" />
+                            </svg>
+                        </div>
+                        <div class="select">
+                            <select name="temp" aria-label="Temperature Requirement">
+                                <option value="" selected disabled hidden>Temperature Requirement</option>
+                                <option>-40°C Frozen</option>
+                                <option>2–8°C Refrigerated</option>
+                                <option>15–25°C Controlled Ambient</option>
+                            </select>
+                            <svg>
+                                <use href="#i-chev" />
+                            </svg>
+                        </div>
+                        <textarea name="details" rows="3" placeholder="Your Message"
+                            aria-label="Your Message">{{ old('details') }}</textarea>
+                        <button type="submit" class="btn btn--primary btn--block">Get My Quote <svg>
+                                <use href="#i-arrow" />
+                            </svg></button>
+                        <p class="form__note"><svg>
+                                <use href="#i-lock" />
+                            </svg>Your information is safe with us.</p>
+                        <p class="form__msg" role="status" aria-live="polite">
+                            @if (session('success')) {{ session('success') }} @elseif ($errors->any()) {{
+                            $errors->first() }} @endif
+                        </p>
+                    </form>
+                </aside>
+            </div>
+        </section>
+
+        {{-- ============ FEATURES STRIP ============ --}}
+        <section class="features">
+            <div class="container features__inner">
+                <div class="feature" data-anim="fade-up"><svg>
+                        <use href="#i-snow" />
+                    </svg>
+                    <p>Temperature Range<br>-40°C to +25°C</p>
+                </div>
+                <div class="feature" data-anim="fade-up" data-delay="100"><svg>
+                        <use href="#i-shield" />
+                    </svg>
+                    <p>Proven Performance<br>120 Hours Above</p>
+                </div>
+                <div class="feature" data-anim="fade-up" data-delay="200"><svg>
+                        <use href="#i-factory" />
+                    </svg>
+                    <p>Time Tested<br>Performance</p>
+                </div>
+                <div class="feature" data-anim="fade-up" data-delay="300"><svg>
+                        <use href="#i-headset" />
+                    </svg>
+                    <p>Dedicated Technical<br>Support</p>
+                </div>
+            </div>
+        </section>
+
+        {{-- ============ SOLUTIONS ============ --}}
+        <section class="solutions" id="solutions">
+            <div class="container">
+                <h2 class="sec-title" data-anim="fade-up"><span>Explore Our Temperature-Controlled Packaging
+                        Solutions</span></h2>
+                <div class="cards">
+                    <article class="card" data-anim="fade-up">
+                        <div class="card__img"><img src="{{ asset('public/assets/img/product-single-use.webp') }}"
+                                alt="Allwin single-use insulated courier shipper" loading="lazy" width="900"
+                                height="701"></div>
+                        <div class="card__body">
+                            <h3>Single-Use Cold Chain Packaging</h3>
+                            <p>XPS insulated boxes for secure single-use shipments.</p>
+                            <a href="#enquire" class="link" data-quote
+                                data-product="Single-Use Cold Chain Packaging">Enquire Now <svg>
+                                    <use href="#i-arrow" />
+                                </svg></a>
+                        </div>
+                    </article>
+                    <article class="card" data-anim="fade-up" data-delay="100">
+                        <div class="card__img"><img src="{{ asset('public/assets/img/product-vip-shipper.webp') }}"
+                                alt="Allwin VIP reusable shipper with vaccine packs and gel packs" loading="lazy"
+                                width="900" height="701"></div>
+                        <div class="card__body">
+                            <h3>Reusable Cold Chain Shippers</h3>
+                            <p>VIP insulated packaging for high-performance applications.</p>
+                            <a href="#enquire" class="link" data-quote
+                                data-product="Reusable Cold Chain Shippers">Enquire Now <svg>
+                                    <use href="#i-arrow" />
+                                </svg></a>
+                        </div>
+                    </article>
+                    <article class="card" data-anim="fade-up" data-delay="200">
+                        <div class="card__img"><img src="{{ asset('public/assets/img/product-pcm-packs.webp') }}"
+                                alt="Allwin PCM cold packs and chill pads" loading="lazy" width="874" height="909">
+                        </div>
+                        <div class="card__body">
+                            <h3>PCM Ice Packs / Chill Pads</h3>
+                            <p>Temperature-specific coolant solutions.</p>
+                            <a href="#enquire" class="link" data-quote data-product="PCM Ice Packs / Chill Pads">Enquire
+                                Now <svg>
+                                    <use href="#i-arrow" />
+                                </svg></a>
+                        </div>
+                    </article>
+                    <article class="card" data-anim="fade-up" data-delay="300">
+                        <div class="card__img"><img src="{{ asset('public/assets/img/product-data-logger.webp') }}"
+                                alt="Cold chain temperature data logger" loading="lazy" width="633" height="558"></div>
+                        <div class="card__body">
+                            <h3>Temperature Data Loggers</h3>
+                            <p>Monitor and ensure temperature integrity during transit.</p>
+                            <a href="#enquire" class="link" data-quote data-product="Temperature Data Loggers">Enquire
+                                Now <svg>
+                                    <use href="#i-arrow" />
+                                </svg></a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        {{-- ============ TEMPERATURE BANNER ============ --}}
+        <section class="temp">
+            <img src="{{ asset('public/assets/img/temp-banner-new.webp') }}" alt="" class="temp__img" aria-hidden="true"
+                loading="lazy" data-anim="fade-left" width="1280" height="700">
+            <div class="container temp__inner">
+                <div class="temp__content" data-anim="fade-right">
+                    <h2>Packaging Designed Around Your Temperature Requirements</h2>
+                    <p>Whether it’s frozen, refrigerated or controlled ambient, we have the right solution.</p>
+                    <a href="#enquire" class="btn btn--primary btn--rect" data-quote>Discuss Your Requirement <svg>
+                            <use href="#i-arrow" />
+                        </svg></a>
+                </div>
+                <div class="temp__stats">
+                    <div class="stat" data-anim="fade-up">
+                        <span class="stat__icon stat__icon--snow"><svg>
+                                <use href="#i-snow" />
+                            </svg></span>
+                        <strong><span data-count="-40">-40</span>°C</strong><small>Frozen Shipments</small>
+                    </div>
+                    <div class="stat" data-anim="fade-up" data-delay="120">
+                        <span class="stat__icon stat__icon--thermo"><svg>
+                                <use href="#i-thermo" />
+                            </svg></span>
+                        <strong>2–<span data-count="8">8</span>°C</strong><small>Refrigerated Shipments</small>
+                    </div>
+                    <div class="stat" data-anim="fade-up" data-delay="240">
+                        <span class="stat__icon stat__icon--sun"><svg>
+                                <use href="#i-sun" />
+                            </svg></span>
+                        <strong>15–<span data-count="25">25</span>°C</strong><small>Controlled Ambient</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {{-- ============ INDUSTRIES ============ --}}
+        <section class="industries" id="industries">
+            <div class="container">
+                <h2 class="sec-title" data-anim="fade-up"><span>Industries We Serve</span></h2>
+                <div class="ind-grid">
+                    <a href="#enquire" class="ind" data-anim="fade-up">
+                        <img src="{{ asset('public/assets/img/industry-pharma.webp') }}" alt="" loading="lazy"
+                            width="900" height="503">
+                        <span class="ind__icon"><svg>
+                                <use href="#i-pills" />
+                            </svg></span>
+                        <h3>Pharmaceutical</h3>
+                    </a>
+                    <a href="#enquire" class="ind" data-anim="fade-up" data-delay="100">
+                        <img src="{{ asset('public/assets/img/industry-healthcare.webp') }}" alt="" loading="lazy"
+                            width="900" height="503">
+                        <span class="ind__icon"><svg>
+                                <use href="#i-health" />
+                            </svg></span>
+                        <h3>Healthcare &amp;<br>Health Science</h3>
+                    </a>
+                    <a href="#enquire" class="ind" data-anim="fade-up" data-delay="200">
+                        <img src="{{ asset('public/assets/img/industry-labs.webp') }}" alt="" loading="lazy" width="900"
+                            height="503">
+                        <span class="ind__icon"><svg>
+                                <use href="#i-flask" />
+                            </svg></span>
+                        <h3>Laboratories &amp;<br>Biotechnology</h3>
+                    </a>
+                    <a href="#enquire" class="ind" data-anim="fade-up" data-delay="300">
+                        <img src="{{ asset('public/assets/img/industry-logistics.webp') }}" alt="" loading="lazy"
+                            width="900" height="503">
+                        <span class="ind__icon"><svg>
+                                <use href="#i-truck" />
+                            </svg></span>
+                        <h3>Logistics &amp; E-commerce</h3>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        {{-- ============ ABOUT ============ --}}
+        <section class="about" id="about">
+            <div class="about__img" data-anim="fade-right">
+                <img src="{{ asset('public/assets/img/about-new.webp') }}"
+                    alt="Allwin team packing insulated cold chain boxes in the warehouse" loading="lazy" width="1454"
+                    height="528">
+            </div>
+            <div class="about__content" data-anim="fade-up">
+                <h2>Your Reliable Partner for Cold Chain Packaging</h2>
+                <ul class="about__list">
+                    <li><svg>
+                            <use href="#i-check" />
+                        </svg>In-house Manufacturing Excellence</li>
+                    <li><svg>
+                            <use href="#i-check" />
+                        </svg>Quality Tested &amp; Validated</li>
+                    <li><svg>
+                            <use href="#i-check" />
+                        </svg>Customized Packaging Solutions</li>
+                    <li><svg>
+                            <use href="#i-check" />
+                        </svg>Expert Technical Support</li>
+                    <li><svg>
+                            <use href="#i-check-o" />
+                        </svg>Multiple Temperature Options</li>
+                    <li><svg>
+                            <use href="#i-check-o" />
+                        </svg>On-Time Delivery</li>
+                </ul>
+            </div>
+            <div class="about__badges" data-anim="fade-left">
+                <div class="abadge"><span class="abadge__icon abadge__icon--iso">ISO</span>
+                    <p>ISO<br>9001:2015<br>Certified</p>
+                </div>
+                <div class="abadge"><span class="abadge__icon"><svg>
+                            <use href="#i-globe" />
+                        </svg></span>
+                    <p>Global<br>Shipping Support</p>
+                </div>
+                <div class="abadge"><span class="abadge__icon"><svg>
+                            <use href="#i-crown" />
+                        </svg></span>
+                    <p>Trusted by<br>Leading Brands</p>
+                </div>
+            </div>
+        </section>
+
+        {{-- ============ CLIENTS ============ --}}
+        <section class="clients" id="clients">
+            <div class="container">
+                <h2 class="sec-title sec-title--sm" data-anim="fade-up"><span>Trusted by Global Clients</span></h2>
+                <div class="clients__inner">
+                    {{-- Logo slider: auto-scrolls in a loop. To add a client, add one more .logos__item (240x132 logo)
+                    below. --}}
+                    <div class="logos" data-anim="fade-up" aria-label="Our clients">
+                        <div class="logos__track">
+                            <div class="logos__item"><img src="{{ asset('public/assets/img/clients/01.webp') }}"
+                                    alt="Nestle logo" width="480" height="264" loading="lazy"></div>
+                            <div class="logos__item"><img src="{{ asset('public/assets/img/clients/02.webp') }}"
+                                    alt="Tata logo" width="480" height="264" loading="lazy"></div>
+                            <div class="logos__item"><img src="{{ asset('public/assets/img/clients/03.webp') }}"
+                                    alt="Zomato logo" width="480" height="264" loading="lazy"></div>
+                            <div class="logos__item"><img src="{{ asset('public/assets/img/clients/04.webp') }}"
+                                    alt="Parle logo" width="480" height="264" loading="lazy"></div>
+                            <div class="logos__item"><img src="{{ asset('public/assets/img/clients/05.webp') }}"
+                                    alt="Hitachi logo" width="480" height="264" loading="lazy"></div>
+                            <div class="logos__item"><img src="{{ asset('public/assets/img/clients/06.webp') }}"
+                                    alt="Saint-Gobain logo" width="480" height="264" loading="lazy"></div>
+                            <div class="logos__item"><img src="{{ asset('public/assets/img/clients/07.webp') }}"
+                                    alt="Tyson logo" width="480" height="264" loading="lazy"></div>
+                            <div class="logos__item"><img src="{{ asset('public/assets/img/clients/08.webp') }}"
+                                    alt="Polycab logo" width="480" height="264" loading="lazy"></div>
+                            <div class="logos__item"><img src="{{ asset('public/assets/img/clients/09.webp') }}"
+                                    alt="Divi’s logo" width="480" height="264" loading="lazy"></div>
+                            <div class="logos__item"><img src="{{ asset('public/assets/img/clients/10.webp') }}"
+                                    alt="HiMedia logo" width="480" height="264" loading="lazy"></div>
+                            <div class="logos__item"><img src="{{ asset('public/assets/img/clients/11.webp') }}"
+                                    alt="Sicgil CO2 logo" width="480" height="264" loading="lazy"></div>
+                            <div class="logos__item"><img src="{{ asset('public/assets/img/clients/12.webp') }}"
+                                    alt="Cubit logo" width="480" height="264" loading="lazy"></div>
+                        </div>
+                    </div>
+                    <div class="testimonials" id="testimonial" data-anim="fade-up" data-delay="100" role="region"
+                        aria-roledescription="carousel" aria-label="Client testimonials">
+                        <div class="testimonial__track" aria-live="polite">
+                            <div class="testimonial__slide is-active" aria-hidden="false">
+                                <figure class="testimonial">
+                                    <svg class="testimonial__mark" aria-hidden="true">
+                                        <use href="#i-quote" />
+                                    </svg>
+                                    <div class="testimonial__stars" role="img" aria-label="Rated 5 out of 5"><svg>
+                                            <use href="#i-star" />
+                                        </svg><svg>
+                                            <use href="#i-star" />
+                                        </svg><svg>
+                                            <use href="#i-star" />
+                                        </svg><svg>
+                                            <use href="#i-star" />
+                                        </svg><svg>
+                                            <use href="#i-star" />
+                                        </svg></div>
+                                    <blockquote>
+                                        <p>“We are highly satisfied with the reusable cold chain shippers from Allwin
+                                            Cold Chain. Their lightweight design, durability, and easy handling have
+                                            improved our packaging and inventory management. We highly recommend Allwin
+                                            Cold Chain to businesses looking for reliable and high-quality reusable cold
+                                            chain packaging solutions.”</p>
+                                    </blockquote>
+                                    <figcaption class="testimonial__author">
+                                        <span class="testimonial__avatar" aria-hidden="true">JP</span>
+                                        <span><strong>Jignesh Patel</strong><small>Reusable Cold Chain
+                                                Shippers</small></span>
+                                    </figcaption>
+                                </figure>
+                                <figure class="testimonial">
+                                    <svg class="testimonial__mark" aria-hidden="true">
+                                        <use href="#i-quote" />
+                                    </svg>
+                                    <div class="testimonial__stars" role="img" aria-label="Rated 5 out of 5"><svg>
+                                            <use href="#i-star" />
+                                        </svg><svg>
+                                            <use href="#i-star" />
+                                        </svg><svg>
+                                            <use href="#i-star" />
+                                        </svg><svg>
+                                            <use href="#i-star" />
+                                        </svg><svg>
+                                            <use href="#i-star" />
+                                        </svg></div>
+                                    <blockquote>
+                                        <p>“We are highly satisfied with Allwin Cold Chain’s single-use cold chain
+                                            packaging, which provides reliable product protection and easy handling
+                                            during transportation. Its quality and performance have made our shipping
+                                            process more efficient, and we highly recommend Allwin for dependable cold
+                                            chain packaging solutions.”</p>
+                                    </blockquote>
+                                    <figcaption class="testimonial__author">
+                                        <span class="testimonial__avatar" aria-hidden="true">A</span>
+                                        <span><strong>Ahmed</strong><small>Single-Use Cold Chain
+                                                Packaging</small></span>
+                                    </figcaption>
+                                </figure>
+                            </div>
+                            <div class="testimonial__slide" aria-hidden="true">
+                                <figure class="testimonial">
+                                    <svg class="testimonial__mark" aria-hidden="true">
+                                        <use href="#i-quote" />
+                                    </svg>
+                                    <div class="testimonial__stars" role="img" aria-label="Rated 5 out of 5"><svg>
+                                            <use href="#i-star" />
+                                        </svg><svg>
+                                            <use href="#i-star" />
+                                        </svg><svg>
+                                            <use href="#i-star" />
+                                        </svg><svg>
+                                            <use href="#i-star" />
+                                        </svg><svg>
+                                            <use href="#i-star" />
+                                        </svg></div>
+                                    <blockquote>
+                                        <p>“As a food distributor, maintaining product freshness and safe transportation
+                                            is essential to our business. Allwin Cold Chain’s reusable cold chain
+                                            shippers have been an excellent choice, offering reliable insulation,
+                                            durability, and easy handling while helping protect our
+                                            temperature-sensitive products during transit.”</p>
+                                    </blockquote>
+                                    <figcaption class="testimonial__author">
+                                        <span class="testimonial__avatar" aria-hidden="true">RP</span>
+                                        <span><strong>Rajesh Patel</strong><small>Food Distributor</small></span>
+                                    </figcaption>
+                                </figure>
+                                <figure class="testimonial">
+                                    <svg class="testimonial__mark" aria-hidden="true">
+                                        <use href="#i-quote" />
+                                    </svg>
+                                    <div class="testimonial__stars" role="img" aria-label="Rated 5 out of 5"><svg>
+                                            <use href="#i-star" />
+                                        </svg><svg>
+                                            <use href="#i-star" />
+                                        </svg><svg>
+                                            <use href="#i-star" />
+                                        </svg><svg>
+                                            <use href="#i-star" />
+                                        </svg><svg>
+                                            <use href="#i-star" />
+                                        </svg></div>
+                                    <blockquote>
+                                        <p>“We sincerely appreciate the commitment and support provided by Allwin Cold
+                                            Chain in delivering high-quality reusable cold chain boxes for our
+                                            healthcare and laboratory requirements. The boxes are performing as
+                                            expected, providing reliable temperature protection and helping us safely
+                                            store and transport temperature-sensitive medical and laboratory products.”
+                                        </p>
+                                    </blockquote>
+                                    <figcaption class="testimonial__author">
+                                        <span class="testimonial__avatar" aria-hidden="true">JS</span>
+                                        <span><strong>Jaldeep Sathvara</strong><small>Healthcare &amp;
+                                                Laboratory</small></span>
+                                    </figcaption>
+                                </figure>
+                            </div>
+                        </div>
+                        <div class="testimonial__dots"><button type="button" class="testimonial__dot is-active"
+                                aria-label="Show testimonials 1–2"></button><button type="button"
+                                class="testimonial__dot" aria-label="Show testimonials 3–4"></button></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {{-- ============ CTA BANNER (full width) ============ --}}
+        <section class="cta" id="contact">
+            <div class="container cta__inner">
+                <div class="cta__content" data-anim="fade-right">
+                    <span class="cta__eyebrow"><svg>
+                            <use href="#i-snow" />
+                        </svg>Let’s talk cold chain</span>
+                    <h2>Looking for the Right <span>Cold Chain Packaging Solution?</span></h2>
+                    <p>Tell us your product type, temperature requirements and shipment duration. Our team will help you
+                        find the perfect solution.</p>
+                    <ul class="cta__points">
+                        <li><svg>
+                                <use href="#i-check" />
+                            </svg>Expert technical guidance</li>
+                        <li><svg>
+                                <use href="#i-check" />
+                            </svg>Custom-sized packaging</li>
+                        <li><svg>
+                                <use href="#i-check" />
+                            </svg>-40°C to +25°C range</li>
+                    </ul>
+                    <div class="cta__actions">
+                        <a href="#enquire" class="btn btn--white btn--lg" data-quote>Request a Free Quote <svg>
+                                <use href="#i-arrow" />
+                            </svg></a>
+                        <a href="tel:+919687640805" class="cta__call">
+                            <span class="cta__call-icon"><svg>
+                                    <use href="#i-phone" />
+                                </svg></span>
+                            <span><small>Call us directly</small><strong>+91 96876 40805</strong></span>
+                        </a>
+                        <a href="https://wa.me/919687640805" class="cta__wa" target="_blank" rel="noopener"><svg>
+                                <use href="#i-wa" />
+                            </svg>WhatsApp</a>
+                    </div>
+                </div>
+                <div class="cta__visual" data-anim="fade-left" data-delay="150">
+                    <div class="cta__frame">
+                        <img src="{{ asset('public/assets/img/cta-box.webp') }}"
+                            alt="Allwin cold chain box on a pallet in a warehouse" loading="lazy" width="636"
+                            height="550">
+                    </div>
+                    <div class="cta__chip cta__chip--1"><span class="cta__chip-icon"><svg>
+                                <use href="#i-snow" />
+                            </svg></span><span><strong>-40°C to +25°C</strong><small>Temperature range</small></span>
+                    </div>
+                    <div class="cta__chip cta__chip--2"><span class="cta__chip-icon"><svg>
+                                <use href="#i-shield" />
+                            </svg></span><span><strong>120 Hours Above</strong><small>Proven performance</small></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    {{-- ============ FOOTER ============ --}}
+    <footer class="footer">
+        <div class="container footer__inner">
+            <div class="footer__brand" data-anim="fade-up">
+                <img src="{{ asset('public/assets/img/logo-allwin-white.svg') }}" alt="Allwin Cold Chain Solutions"
+                    width="216" height="59">
+                <p>Innovative Packaging. Trusted Performance.</p>
+                <div class="social" aria-label="Follow Allwin">
+                    <a href="https://www.linkedin.com/company/allwin-cold-chain-solutions/" aria-label="LinkedIn"
+                        target="_blank" rel="noopener"><svg>
+                            <use href="#i-in" />
+                        </svg></a>
+                    <a href="https://www.instagram.com/allwincoldchain/" aria-label="Instagram" target="_blank"
+                        rel="noopener"><svg>
+                            <use href="#i-ig" />
+                        </svg></a>
+                    <a href="https://www.facebook.com/allwincoldchainsolutions" aria-label="Facebook" target="_blank"
+                        rel="noopener"><svg>
+                            <use href="#i-fb" />
+                        </svg></a>
+                </div>
+            </div>
+            <div class="footer__col" data-anim="fade-up" data-delay="100">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#solutions">Products</a></li>
+                    <li><a href="#industries">Applications</a></li>
+                    <li><a href="{{ url('/contact-us') }}">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer__col" data-anim="fade-up" data-delay="200">
+                <h4>Our Solutions</h4>
+                <ul>
+                    <li><a href="#solutions">Cold Chain Packaging</a></li>
+                    <li><a href="#solutions">PCM Coolant Packs</a></li>
+                    <li><a href="#solutions">VIP Packaging</a></li>
+                    <li><a href="#solutions">Temperature Data Loggers</a></li>
+                </ul>
+            </div>
+            <div class="footer__col" data-anim="fade-up" data-delay="300">
+                <h4>Get in Touch</h4>
+                <ul class="footer__contact">
+                    <li><a href="mailto:sales@allwincoldchainsolutions.com"><svg>
+                                <use href="#i-mail" />
+                            </svg><span>sales@allwincoldchainsolutions.com</span></a></li>
+                    <li><a href="tel:+919687640805"><svg>
+                                <use href="#i-phone" />
+                            </svg><span>+91 96876 40805</span></a></li>
+                    <li class="footer__addr"><svg>
+                            <use href="#i-pin" />
+                        </svg>
+                        <address>Survey No. NA1466, Yash Raj Industrial Estate, Plot No. 15, Khatraj, Kalol – 382721,
+                            Gujarat</address>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer__bar">
+            <div class="container footer__bar-inner">
+                <p class="footer__copy">© <span id="year">{{ date('Y') }}</span> Allwin Cold Chain Solutions. All Rights
+                    Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    @include('layouts.whatsapp')
+
+    {{-- Fixed side button (opens the enquiry popup) --}}
+    <button type="button" class="side-cta" data-quote aria-label="Enquire Now">
+        <svg>
+            <use href="#i-mail" />
+        </svg><span>Enquire Now</span>
+    </button>
+
+    {{-- Enquiry popup --}}
+    <div class="modal" id="quoteModal" aria-hidden="true">
+        <div class="modal__box modal__box--form" role="dialog" aria-modal="true" aria-labelledby="quoteModalTitle">
+            <button class="modal__close" type="button" aria-label="Close">&times;</button>
+            <h2 class="enquire__title" id="quoteModalTitle"><svg>
+                    <use href="#i-send" />
+                </svg>Enquire Now</h2>
+            <p class="enquire__sub">Get expert advice and the right solution for your cold chain needs.</p>
+            <form class="form" id="quoteFormPopup" method="POST" action="{{ route('enquiry.store') }}" novalidate>
+                @csrf
+                <input type="text" name="website_url" tabindex="-1" autocomplete="off" aria-hidden="true"
+                    style="position:absolute;left:-9999px;opacity:0;height:0;width:0">
+                <input type="text" name="name" placeholder="Full Name *" required aria-label="Full Name">
+                <input type="text" name="company" placeholder="Company Name *" required aria-label="Company Name">
+                <input type="email" name="email" placeholder="Business Email *" required aria-label="Business Email">
+                <input type="tel" name="phone" placeholder="Contact Number *" required aria-label="Contact Number">
+                <div class="select">
+                    <select name="product" aria-label="Product Requirement">
+                        <option value="" selected disabled hidden>Product Requirement</option>
+                        <option>Single-Use Cold Chain Packaging</option>
+                        <option>Reusable Cold Chain Shippers</option>
+                        <option>PCM Ice Packs / Chill Pads</option>
+                        <option>Temperature Data Loggers</option>
+                    </select>
+                    <svg>
+                        <use href="#i-chev" />
+                    </svg>
+                </div>
+                <div class="select">
+                    <select name="temp" aria-label="Temperature Requirement">
+                        <option value="" selected disabled hidden>Temperature Requirement</option>
+                        <option>-40°C Frozen</option>
+                        <option>2–8°C Refrigerated</option>
+                        <option>15–25°C Controlled Ambient</option>
+                    </select>
+                    <svg>
+                        <use href="#i-chev" />
+                    </svg>
+                </div>
+                <textarea name="details" rows="3" placeholder="Your Message" aria-label="Your Message"></textarea>
+                <button type="submit" class="btn btn--primary btn--block">Get My Quote <svg>
+                        <use href="#i-arrow" />
+                    </svg></button>
+                <p class="form__note"><svg>
+                        <use href="#i-lock" />
+                    </svg>Your information is safe with us.</p>
+                <p class="form__msg" role="status" aria-live="polite"></p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        window.APP = {
+            quoteUrl: "{{ route('enquiry.store') }}",
+            thankYouUrl: "{{ route('thankyou') }}",
+            csrf: "{{ csrf_token() }}",
+            assetBase: "{{ asset('public/assets') }}"
+        };
+    </script>
+    <script src="{{ asset('public/assets/js/main.js') }}"></script>
+</body>
+
+</html>

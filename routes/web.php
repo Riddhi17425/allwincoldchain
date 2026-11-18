@@ -26,6 +26,7 @@ use App\Http\Controllers\ServiceFrontController;
 use App\Http\Controllers\WhatsappController;
 use App\Http\Controllers\EnquiryController;
 use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\ColdChainPackagingSolutions;
 
 //Front route
 Route::get('/', [dashboardController::class, 'index'])->name('/');
@@ -53,6 +54,8 @@ Route::post('/contact-us', [ContactController::class, 'contactStore'])->name('co
 Route::get('/thank-you', [ContactController::class, 'thankyou'])->name('thankyou');
 Route::post('/whatsapp-store', [WhatsappController::class, 'store']);
 Route::post('/enquiry-store', [EnquiryController::class, 'store'])->name('enquiry.store');
+
+Route::get('/cold-chain-packaging-solutions', [ColdChainPackagingSolutions::class, 'index'])->name('cold-chain-solutions');
 
 //backend route
 Route::get('login', [dashboardController::class, 'login'])->name('login');

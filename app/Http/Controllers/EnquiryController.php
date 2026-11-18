@@ -2,58 +2,90 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Enquiry;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use App\Models\Enquiry;
+use Illuminate\Support\Facades\Log;
 
 class EnquiryController extends Controller
 {
     public function store(Request $request)
     {
+        $successMessage = 'Your enquiry has been received successfully.';
+
         // Honeypot spam check — real users never fill this hidden field
         if ($request->filled('website_url')) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Your enquiry has been received successfully.',
-            ]);
+            Log::info('Enquiry skipped: honeypot filled', ['ip' => $request->ip()]);
+            return $this->respond($request, $successMessage);
         }
 
-        $request->validate([
+        $data = $request->validate([
             'name'    => 'required|string|max:255',
             'phone'   => 'required|string|max:20',
-            'email'   => 'required|email',
+            'email'   => 'required|email|max:255',
             'details' => 'nullable|string',
+            'company' => 'nullable|string|max:255',
+            'product' => 'nullable|string|max:255',
+            'temp'    => 'nullable|string|max:255',
         ]);
 
         // 1. Save to Database
-        $enquiry = Enquiry::create([
-            'name'    => $request->name,
-            'phone'   => $request->phone,
-            'email'   => $request->email,
-            'details' => $request->details,
-        ]);
+        try {
+            Enquiry::create([
+                'name'        => $data['name'],
+                'phone'       => $data['phone'],
+                'email'       => $data['email'],
+                'details'     => $data['details'] ?? null,
+                'company'     => $data['company'] ?? null,
+                'product'     => $data['product'] ?? null,
+                'temperature' => $data['temp'] ?? null,
+            ]);
+        } catch (\Throwable $e) {
+            // Real reason is written to storage/logs/laravel.log
+            Log::error('Enquiry save failed: ' . $e->getMessage());
 
-        // 2. Send to Google Sheet (SAME sheet/webhook as the Contact Us form,
-        //    differentiated by the "inquiry_type" field so it lands in the
-        //    same tab with a column that shows which form it came from)
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Sorry, something went wrong. Please try again.',
+                ], 500);
+            }
+            return back()->withInput()->withErrors(['server' => 'Sorry, something went wrong. Please try again.']);
+        }
+
+        // 2. Send to Google Sheet (failure must never block the user)
         $payload = [
-            'inquiry_type' => 'Enquiry Form',
-            'name'         => $request->name,
-            'phone'        => $request->phone,
-            'email'        => $request->email,
-            'message'      => $request->details,
+            'inquiry_type' => 'Cold chain packaging solution page',
+            'name'         => $data['name'],
+            'company'      => $data['company'] ?? '',
+            'phone'        => $data['phone'],
+            'email'        => $data['email'],
+            'product'      => $data['product'] ?? '',
+            'temperature'  => $data['temp'] ?? '',
+            'message'      => $data['details'] ?? '',
+            'date'      => now()->format('Y-m-d H:i:s'),
         ];
 
         try {
-            Http::post('https://script.google.com/macros/s/AKfycbwwru4McNS1pez-Bquj-5qyIM5z1RiuGMtQ_jjQKdeIT32oXr42eM9dYG9ZWy32jE1_/exec', $payload);
-        } catch (\Exception $e) {
-            // Sheet fail ho toh bhi user ko error na aaye, DB me record safe hai
+            Http::timeout(10)->post('https://script.google.com/macros/s/AKfycbwwru4McNS1pez-Bquj-5qyIM5z1RiuGMtQ_jjQKdeIT32oXr42eM9dYG9ZWy32jE1_/exec', $payload);
+        } catch (\Throwable $e) {
+            Log::warning('Enquiry Google Sheet failed: ' . $e->getMessage());
         }
 
-        // 3. Return JSON (form is submitted via AJAX/fetch)
-        return response()->json([
-            'success' => true,
-            'message' => 'Your enquiry has been received successfully.',
-        ]);
+        // 3. Respond (JSON for AJAX, redirect for normal form post)
+        return $this->respond($request, $successMessage);
+    }
+
+    private function respond(Request $request, string $message)
+    {
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success'  => true,
+                'message'  => $message,
+                'redirect' => route('thankyou'),   // your existing route name
+            ]);
+        }
+
+        return redirect()->route('thankyou')->with('success', $message);
     }
 }
