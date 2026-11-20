@@ -55,7 +55,7 @@ class EnquiryController extends Controller
 
         // 2. Send to Google Sheet (failure must never block the user)
         $payload = [
-            'inquiry_type' => 'Cold chain packaging solution page',
+            'inquiry_type' => !empty($data['product']) ? 'PPC Inquiry' : 'Enquiry Form',
             'name'         => $data['name'],
             'company'      => $data['company'] ?? '',
             'phone'        => $data['phone'],
